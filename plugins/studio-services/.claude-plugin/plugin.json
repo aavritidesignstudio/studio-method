@@ -1,0 +1,16 @@
+{
+  "name": "studio-services",
+  "version": "0.1.0",
+  "description": "The services behind the app and site: Supabase (local and cloud, migrations, edge functions, auth), Cloudflare R2 and DNS, Vercel, Resend + Zoho email, Google sign-in, EAS, and an environment-variable wizard that keeps secrets out of chat.",
+  "author": {
+    "name": "Aavriti Design Studio"
+  },
+  "keywords": [
+    "supabase",
+    "cloudflare",
+    "vercel",
+    "resend",
+    "dns",
+    "env"
+  ]
+}

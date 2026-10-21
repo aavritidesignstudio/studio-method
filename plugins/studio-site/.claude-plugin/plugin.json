@@ -1,0 +1,16 @@
+{
+  "name": "studio-site",
+  "version": "0.1.0",
+  "description": "The product website: a story-led marketing site (Vite, React, Tailwind, GSAP), mockups reused as live demos, an updates page, waitlist, SEO basics and Vercel deploys.",
+  "author": {
+    "name": "Aavriti Design Studio"
+  },
+  "keywords": [
+    "website",
+    "vite",
+    "react",
+    "tailwind",
+    "gsap",
+    "vercel"
+  ]
+}
