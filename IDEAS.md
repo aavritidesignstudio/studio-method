@@ -63,7 +63,8 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | crash-watch | app | Crash and error reporting (e.g. Sentry), source maps for OTA bundles, alert rules |
 | support-desk | services | Support email aliases, in-app feedback, canned replies, a weekly digest |
 | cost-watch | services | Quotas and bills across EAS, Supabase, R2, Vercel, email, AI; alerts before limits |
-| admin-console | site | The owner's settings and switches in one protected page, from the project's admin-ideas list |
+| admin-console | site | Protected owner panel: everyone in one People list (waitlist + testers + app users, counts only), interest funnel, closed-test tester flow (pick → invite → Play Gmail via form → add on Play → installed), email + push with audiences and a weekly limit, feedback + contact inbox, feature switches read from a device-cached flags table, paid plans later. Mockup first. From WowTodo 2026-10 |
+| social-studio | site | Content factory for every social channel: one review artifact (full-screen preview, copy buttons, downloads, status per post), one master repurposed per channel, Remotion masters + Mediabunny in-browser cut-downs + voiceover, persona, captions, hashtags and a UTM tag per post. Style mockup before rendering. From WowTodo 2026-10 |
 | growth-loops | site | Referral links, share cards, store rating prompts at the right moment |
 
 ## 8. The method itself

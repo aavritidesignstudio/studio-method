@@ -185,3 +185,8 @@
 **Rule:** If the owner plans a paid tier, remind them (once, at a natural pause) when pricing, plans or limits work comes up or the production launch is planned. A paid tier is an in-app subscription inside a free app (the store's free-to-paid switch is permanent and one-way).
 **Why:** The owner asked to be reminded.
 **How to apply:** Prerequisites to mention: payments profile, billing integration, subscription products, data-safety and privacy updates, content-rating re-check.
+
+### Record "last seen" on return to the foreground too
+**Rule:** Any "last opened / active / last seen" record must fire when the app comes back to the foreground, not only on launch (once per day is enough).
+**Why:** Android keeps apps alive in the background for days; a launch-only ping missed people who used the app every day.
+**How to apply:** Call the daily ping after the first frame and on every app-state change to "active"; keep the last-sent date on the device so it costs one call a day.
