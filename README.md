@@ -187,9 +187,13 @@ Install only what a project needs. Every skill works in any project; WowTodo app
 ### 1. Add the marketplace
 In Claude Code, any project:
 ```
+/plugin marketplace add aavritidesignstudio/studio-method
+```
+That's the GitHub mirror. The same marketplace from GitLab, where it's developed:
+```
 /plugin marketplace add https://gitlab.com/aavritidesignstudio/studio-method.git
 ```
-Also works: a GitHub mirror as `owner/repo`, or a local clone by path (`/plugin marketplace add ./studio-method`).
+A local clone works too: `/plugin marketplace add ./studio-method`.
 
 ### 2. Install the packs you need
 ```
