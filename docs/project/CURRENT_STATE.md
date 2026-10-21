@@ -1,5 +1,5 @@
 # Current state — Studio Method
-**Updated:** 2026-10-21 · **Version:** 0.1.0 · **Commit:** 409598d (+ docs commit)
+**Updated:** 2026-10-21 · **Version:** 0.1.1 (studio-core; other packs 0.1.0)
 
 ## Summary
 Studio Method · App + Site Kit is an open-source (MIT) Claude Code plugin marketplace that packages a proven way of
@@ -7,6 +7,8 @@ working plus the skills to build a React Native (Expo) app and its website and s
 WowTodo project. Home: GitLab `aavritidesignstudio/studio-method` (primary), GitHub mirror of the same name.
 
 ## Working
+- **studio-start guards (0.1.1):** already-set-up projects get catch-up / fill gaps / full re-read; asks which folder
+  when the repo sits one level down; status doc merged, never rewritten; never commits on `main`.
 - Marketplace `.claude-plugin/marketplace.json` with 4 packs, all passing `claude plugin validate .`, installed
   from GitLab on the owner's machine (user scope):
   - **studio-core** (12 skills + `product-lead` agent): studio-start, working-contract, playbook, catch-up,

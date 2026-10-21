@@ -1,6 +1,6 @@
 ---
 name: studio-start
-description: Start a new project with Studio Method (App + Site Kit), or bring an existing repo into the method. Asks what you're building (app, website or both; AI or not; which services), scaffolds it, or for an existing repo first reads the whole codebase, says back what it understood and builds the project's status, map and memory from it; then sets up the status/handoff/contract docs, checks the recommended plugins (ponytail), and hands over to the working contract. Use when the user says "studio start", "start a new project", "set up studio method", "adopt the method", "use our working style here", or opens a repo that has no docs/project folder yet.
+description: Start a new project with Studio Method (App + Site Kit), or bring an existing repo into the method. Asks what you're building (app, website or both; AI or not; which services), scaffolds it, or for an existing repo first reads the whole codebase, says back what it understood and builds the project's status, map and memory from it; then sets up the status/handoff/contract docs, checks the recommended plugins (ponytail), and hands over to the working contract. Safe to run by accident: a project that already has its docs gets a catch-up offer instead, and it asks which folder when the repo sits one level down. Use when the user says "studio start", "start a new project", "set up studio method", "adopt the method", "use our working style here", or opens a repo that has no docs/project folder yet.
 ---
 
 # Studio start
@@ -23,7 +23,21 @@ destructive.
    may point at a different project than the repo; check the project ref before any write).
 4. Load the `working-contract` and `playbook` skills now; they apply from here on.
 
-## 1. New or existing?
+## 1. Where are we, and is it already set up?
+Run these checks first, in this order, before reading any code.
+1. **Right folder?** If the current folder is not a git repo (`git rev-parse --show-toplevel` fails) but a folder
+   one or two levels down is (has `.git`), ask which folder is the project and work there. Never `git init` in a
+   folder that contains an existing repo, and never scaffold next to one.
+2. **Already on the method?** If the project has a status doc (`docs/project/CURRENT_STATE.md` or an equivalent
+   such as `PROJECT_STATUS.md`) **and** a `HANDOFF.md`, it is already set up. Say so in one line, then
+   AskUserQuestion:
+   - **Catch up** (Recommended): run `catch-up` and stop here.
+   - **Fill the gaps**: create only what's missing from 3d, plus `PROJECT_MAP.md` and `PRODUCT_BRIEF.md` if absent,
+     from a targeted read of what they need. No full codebase read; the status doc and existing memory are not
+     touched.
+   - **Full re-read**: section 3, only when the owner says the docs are badly out of date. The status doc is then
+     merged as in 3c, never rewritten.
+3. **New or existing?**
 - **Existing**: the folder has code (`package.json`, `app.json`, `src/`, git history). → section 3.
 - **New**: empty or near-empty folder. → section 2.
 - Unsure? Ask once.
@@ -89,12 +103,15 @@ release flow, who deploys).
 
 ### 3c. Build the project's memory (after the owner confirms)
 - **Status**: `docs/project/CURRENT_STATE.md` with Summary · Working · Open/broken · Next, from the confirmed
-  understanding. If a status doc already exists, update it instead of creating a second one.
+  understanding. If a status doc already exists, **merge into it**: add what's missing and correct lines that are
+  wrong, but never rewrite it from scratch or drop existing detail (release IDs, gotchas, deferred gaps, dates).
+  Show the owner the diff before committing.
 - **Map**: `docs/project/PROJECT_MAP.md`, the codebase map helpers read first: folders, entry points,
   routes/screens, data model, functions, services and env var names, build/run/release commands.
 - **Claude's memory** (this project's auto-memory folder): one memory per fact the code doesn't hold: the owner's
   role and preferences, product goals and audience, deadlines, which account owns which service (never secrets),
-  and every correction from 3b as a feedback memory with its Why. Add each to `MEMORY.md`.
+  and every correction from 3b as a feedback memory with its Why. Add each to `MEMORY.md`. Read `MEMORY.md`
+  first: update a memory that already covers a fact instead of adding a duplicate.
 - **Product brief**: `docs/product/PRODUCT_BRIEF.md` (template in `product-pulse`): who it's for, the problem,
   the promise, the market, current bets. The product-lead agent reads it before every pulse.
 - **Decisions**: record in `DECISIONS.md` only what's confirmed (by the owner, or plainly by commits/docs).
@@ -117,7 +134,8 @@ release flow, who deploys).
   — never secrets). The general rules stay in the playbook; don't copy them into memory.
 
 ### 3e. Hand over
-Commit on the working branch ("Studio start: project map, status and method docs"), then give a `catch-up`-style
+Commit on `dev` or a branch from it, never directly on `main` (no `dev` yet? ask: create `dev` (Recommended) or
+use a feature branch). Message: "Studio start: project map, status and method docs". Then give a `catch-up`-style
 snapshot and ask what to work on.
 
 ## 4. Finish
