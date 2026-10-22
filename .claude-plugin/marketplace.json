@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Studio Method · App + Site Kit: build a React Native app and its website, wire the services, ship to the stores, with a working style that never loses context.",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "plugins": [
     {
