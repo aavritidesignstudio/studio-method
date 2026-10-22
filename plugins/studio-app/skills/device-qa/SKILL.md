@@ -36,6 +36,8 @@ adb -s <serial> shell dumpsys window | grep mCurrentFocus   # must contain the a
 ```
 Run it before EVERY tap, keyevent or text. Not the app -> stop and report. No fixed-coordinate tap sequences without a check between steps. After a cold start, wait for the app window and confirm it. Never press CALL, never open the dialer/contacts (a blind loop once called real contacts). Prefer `uiautomator dump` to find elements over guessed coordinates.
 
+**Web pages on the phone** (site, admin panel): `adb reverse tcp:<port> tcp:<port>`, open with `am start -a android.intent.action.VIEW -d http://localhost:<port>/… com.android.chrome`, and check focus for `com.android.chrome` instead of the app. Chrome's password-manager sheet can swallow the first tap on a login field: dismiss it with Back, tap again, and never pick one of the owner's saved passwords; decline "Save password".
+
 ## 6. Keyboard-open test (every input, every pass)
 For every screen/sheet/dialog touched: tap each text input, screenshot with the keyboard open, confirm the focused input AND its action button (Save/Send/Add) are visible above the keyboard. Re-test after ANY change to the screen, even non-keyboard changes. A pass without these screenshots is not done.
 

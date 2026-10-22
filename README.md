@@ -176,6 +176,7 @@ Install only what a project needs. Every skill works in any project; WowTodo app
 | **stack-guide** | How Supabase, Cloudflare R2 and DNS, Vercel, Resend + Zoho, Google sign-in, EAS and AI providers fit, with the gotchas |
 | **env-setup** | Every env var the chosen services need, where each comes from, `.env.example`, local/cloud swap — secrets never in chat |
 | **email-setup** | Email on your own domain: receive at contact@/support@, reply from them, send `noreply@` through Resend, with deliverability tests |
+| **email-system** | The full email system for app + site + admin panel: versioned templates edited in the panel, replies back into the panel and your inbox, bounce/complaint tracking, unsubscribe, an app updates switch |
 
 ## Install
 

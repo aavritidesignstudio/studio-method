@@ -86,7 +86,8 @@ One mailbox (e.g. `contact@`) + aliases (`privacy@`, `support@`; up to 29 per us
 4. Zoho Admin Console → **Email Authentication / DKIM** → add a selector → copy the TXT (Name `<selector>._domainkey`)
    into Cloudflare (DNS only) → back in Zoho → **Verify** → enable.
 5. Aliases: Admin Console → **Users** → the user → **Mailbox Settings** → **Email Alias** → **Add** → `privacy`, `support`
-   (and `dmarc` if wanted).
+   (and `dmarc`, and `hello` if the app will send from it). Not accounts.zoho.com → "My Email Addresses": that only
+   adds sign-in addresses, it does not create a mailbox alias.
 6. Catch-all (optional, if the plan offers it): Admin Console → mail settings → catch-all → this mailbox.
 7. Install the Zoho Mail app on the phone; in Zoho settings check that each alias appears under the From choices.
 **Check:** MX/SPF/DKIM lookups show Zoho values; mail from the test account to each address arrives in Zoho; a reply
@@ -137,3 +138,5 @@ Optional: score a test mail at https://www.mail-tester.com (aim ≥ 9/10).
 - Update the project's status doc (addresses, providers, which secrets exist — names only, never values).
 - If path 1: add a dated reminder to revisit replying before January 2027.
 - Save a memory with the reply path chosen and the inbox it lands in.
+- Next, for templates edited in an admin panel, replies back into the panel, bounce tracking and unsubscribe: the
+  `email-system` skill. It also moves app mail from `noreply@` to a real `hello@` with a reply subdomain.

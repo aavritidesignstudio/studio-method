@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — 2026-10-22
+- **studio-services 0.2.0 · new skill `email-system`** (from WowTodo, proven live): one shared sender, versioned templates
+  edited in the admin panel (draft · test · publish · restore), replies on a Resend receiving subdomain that land in the
+  panel and the team inbox, Svix-verified webhooks for delivery/bounce/complaint, suppression list, service vs update
+  consent, one-click unsubscribe, an app "email me updates" switch, privacy lines, and the gotchas that cost time.
+  `email-setup` points to it and names the right Zoho alias screen.
+- **studio-core 0.1.4:** rules "Cloud secrets: paste in the dashboard, never through a Windows shell" and "Edit code
+  files with the editor, not escaped shell scripts"; the keyboard rule covers web pages (`interactive-widget=resizes-content`).
+- **studio-app 0.1.2:** device-qa covers web pages on the phone and Chrome's password-manager sheet.
+
 ## 0.1.2 — 2026-10-22
 - **Harvest from WowTodo.** studio-core 0.1.3: new rule "one repo, several Vercel projects: each builds only for its
   own folder"; the wrong-project MCP rule now names the cause (a parent-folder `.mcp.json`) and the fix (a

@@ -57,6 +57,16 @@
 **Why:** Leaked keys cost money and require rotation; one temp folder holding a DB password was one `git add` from a public repo.
 **How to apply:** Check `.gitignore` covers `.env*`, the backend CLI's temp dir and build output. Use `secrets list` style commands that print digests only.
 
+### Cloud secrets: paste in the dashboard, never through a Windows shell
+**Rule:** On Windows, the owner sets backend secrets (webhook signing secrets, API keys) in the provider's dashboard (e.g. Supabase → Edge Functions → Secrets), not with `npx … secrets set` in PowerShell. Never hand over commands with `<placeholder>` text to fill in.
+**Why:** The npx `.cmd` shim silently mangled a `whsec_` value; every webhook failed with a bad signature for an hour. Pasted `<…>` placeholders broke another attempt.
+**How to apply:** Give the dashboard click path. To prove a value matches without seeing it, compare SHA-256 of the copied value (`(Get-Clipboard).Trim()`) with the digest from `secrets list`. Redeploy the function if a changed secret is not picked up.
+
+### Edit code files with the editor, not escaped shell scripts
+**Rule:** Write or patch source files with the file-edit tools (or a script that reads a clean snippet file), not with Python/Node heredocs that embed backslash escapes (newline, carriage return, word boundary) in string literals.
+**Why:** Escapes inside heredoc-embedded scripts turned into real newlines and control characters in regexes three times in one session; builds broke in confusing ways.
+**How to apply:** For multi-line code with escapes, write the snippet with the editor to a scratch file, then splice it in by anchor; afterwards grep the file for control characters.
+
 ### Backend MCP/CLI may point at the wrong project
 **Rule:** Before any write through a backend MCP or CLI, confirm which project it targets (project-URL tool, or `supabase projects list`). Never write through a connector that points at another project. Use the project-linked CLI for releases.
 **Why:** An MCP loaded in the session pointed at an unrelated project. Cause: a `.mcp.json` in a PARENT folder (e.g. the folder holding all projects) applies to every project under it, pinned to one project ref.
@@ -77,7 +87,7 @@
 ### The keyboard never hides the input
 **Rule:** Wherever a keyboard opens (screens, sheets, dialogs, inline edits) the focused input AND the button that acts on it (Save, Send, Add) stay visible above the keyboard.
 **Why:** Screens built later regress after an earlier sprint fixed most; it is direct user frustration.
-**How to apply:** Reuse the shared keyboard handling (a screen wrapper or a keyboard-reveal hook; on edge-to-edge Android, window resize does not help). EVERY QA pass taps into EVERY input on each touched screen and screenshots the keyboard-open state, re-tested after any change to that screen even if the change was not keyboard-related. A pass without these checks is not done.
+**How to apply:** Reuse the shared keyboard handling (a screen wrapper or a keyboard-reveal hook; on edge-to-edge Android, window resize does not help). EVERY QA pass taps into EVERY input on each touched screen and screenshots the keyboard-open state, re-tested after any change to that screen even if the change was not keyboard-related. A pass without these checks is not done. Web pages and admin panels: add `interactive-widget=resizes-content` to the viewport meta (Chrome otherwise keeps the layout behind the keyboard) and make long-form action rows sticky; test them in the phone's browser with the keyboard open.
 
 ### Quiet secondary controls
 **Rule:** Only the primary action gets colour. Secondary toggles are icon-only, grey, normal size, with a toast confirming the change. Soft blurred shadows only, never hard lines or bands; check shadows are not clipped by overlays.

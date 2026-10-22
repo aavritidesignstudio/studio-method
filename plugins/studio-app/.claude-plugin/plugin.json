@@ -1,6 +1,6 @@
 {
   "name": "studio-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React Native + Expo apps: device QA on emulator or phone, performance passes, EAS builds and OTA updates, the Play release routine (AAB permission check, release log, What's new) and a premium store listing kit.",
   "author": {
     "name": "Aavriti Design Studio"
