@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2 — 2026-10-22
+- **Harvest from WowTodo.** studio-core 0.1.3: new rule "one repo, several Vercel projects: each builds only for its
+  own folder"; the wrong-project MCP rule now names the cause (a parent-folder `.mcp.json`) and the fix (a
+  local-scope MCP entry pinned to the project). studio-services 0.1.1: Vercel monorepo setup + Root Directory picker
+  workaround; env-setup naming hygiene (fold `NEW_*` names, never `SUPABASE_ACCESS_TOKEN` in `app/.env`) and why the
+  cloud block stays default. studio-app 0.1.1: release-ritual checks `.env` points at the cloud before `eas update`;
+  device-qa notes the Git Bash `/sdcard` path rewrite.
+
 ## 0.1.1 — 2026-10-21
 - **studio-core 0.1.1 · studio-start is safe to run by accident.** A project that already has its status doc and
   handoff gets a choice (catch up · fill only the gaps · full re-read) instead of a full codebase read. When the

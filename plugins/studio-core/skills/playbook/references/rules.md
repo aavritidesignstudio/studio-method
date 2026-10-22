@@ -17,6 +17,11 @@
 **Why:** Fear of rate limits and surprise production changes.
 **How to apply:** If an auto-deploy failed, ask first. The permission system may block production-deploy commands unless an allow rule matches: run each deploy as a bare command (no pipes, no `cd x &&` prefix, no `echo Y |`; `cd` in a separate call first; `git -C <path> push` does not match a `git push` rule). Do not work around a denial; tell the owner and let them run it, then read the result (e.g. the update group id) yourself.
 
+### One repo, several Vercel projects: each builds only for its own folder
+**Rule:** Every Vercel project in a monorepo (site, admin panel, ...) has its own `vercel.json` with the ignored build step, so a push deploys only the projects whose folder changed.
+**Why:** Without it every push rebuilds every project: wasted build minutes, and surprise production deploys of a site nobody touched.
+**How to apply:** Add the `ignoreCommand` from stack-guide `vercel.md` when creating each new Vercel project; test it on two past commits (one touching the folder, one not) before merging to the deploy branch.
+
 ### Do not poll the live site
 **Rule:** After a push, do not curl the production site in a loop waiting for the new build.
 **Why:** It looks like deploy activity to the permission classifier and gets denied; it is also noisy.
@@ -54,8 +59,8 @@
 
 ### Backend MCP/CLI may point at the wrong project
 **Rule:** Before any write through a backend MCP or CLI, confirm which project it targets (project-URL tool, or `supabase projects list`). Never write through a connector that points at another project. Use the project-linked CLI for releases.
-**Why:** An MCP loaded in the session pointed at an unrelated project.
-**How to apply:** Read-only check first; one-off SQL against the right project via the linked CLI.
+**Why:** An MCP loaded in the session pointed at an unrelated project. Cause: a `.mcp.json` in a PARENT folder (e.g. the folder holding all projects) applies to every project under it, pinned to one project ref.
+**How to apply:** Read-only check first; one-off SQL against the right project via the linked CLI. Lasting fix: give the project its own local-scope MCP entry (`claude mcp add --scope local ...`, or `projects["<path>"].mcpServers` in `~/.claude.json`), which beats project scope. For Supabase use the hosted server pinned to the ref, `https://mcp.supabase.com/mcp?project_ref=<ref>` (add `&read_only=true` for read-only), signed in through `/mcp`, so no access token sits in a file. Other projects keep the shared file.
 
 ### Helper briefs and usage limits
 **Rule:** Executors (cheaper-model helpers) get a written brief with: files they may touch, the rules above that apply, report format (10 lines or fewer), commit after each chunk (about every 15 minutes), a notes file (15 lines or fewer), no push. Parallel helpers touch non-overlapping files. Respect the owner's usage-percentage limits (see glossary).

@@ -5,21 +5,21 @@
   },
   "metadata": {
     "description": "Studio Method · App + Site Kit: build a React Native app and its website, wire the services, ship to the stores, with a working style that never loses context.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "plugins": [
     {
       "name": "studio-core",
       "source": "./plugins/studio-core",
       "description": "How we work: start or adopt a project, working contract, status and handoff docs, catch-up and check-out, helper agents, mockup-lab, teach, repo hygiene, and the playbook of hard rules and shared words. Harvest keeps the method growing.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "displayName": "Studio Core · way of working"
     },
     {
       "name": "studio-app",
       "source": "./plugins/studio-app",
       "description": "React Native + Expo apps: device QA on emulator or phone, performance passes, EAS builds and OTA updates, the Play release routine (AAB permission check, release log, What's new) and a premium store listing kit.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "displayName": "Studio App · Expo / React Native"
     },
     {
@@ -33,7 +33,7 @@
       "name": "studio-services",
       "source": "./plugins/studio-services",
       "description": "The services behind the app and site: Supabase (local and cloud, migrations, edge functions, auth), Cloudflare R2 and DNS, Vercel, Resend + Zoho email, Google sign-in, EAS, and an environment-variable wizard that keeps secrets out of chat.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "displayName": "Studio Services · Supabase, Cloudflare, Vercel, email"
     }
   ]

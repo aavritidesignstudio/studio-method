@@ -19,7 +19,8 @@ Never echo a secret value in chat. The user pastes values into the files themsel
 5. **Hand over the click paths** for each missing value (section below), one service at a time. Give numbered steps; say which you could not verify against current docs.
 6. **User fills `.env`.** Say: "Open `<path>`, paste the value after `NAME=`, save, tell me when done." After they confirm, verify without printing: check the name exists and is non-empty (`grep -c '^NAME=.\+' file`), never `cat` the file.
 7. **Cloud secrets** (`supabase secrets set NAME=...`): the user runs the command themselves; you may prepare it with a placeholder. Verify with `supabase secrets list` (digests only).
-8. **Record names** (not values) in `docs/engineering/ENVIRONMENT_VARIABLES.md`: table of Name / Purpose / Public? / Where set.
+8. **Naming hygiene.** One name per value: after a backend or OAuth-client move, fold temporary names (`NEW_SUPABASE_*`, `NEW_GOOGLE_*`) into the standard ones and delete exact duplicates (compare values in a script, never print them). Credentials kept only for reference (DB password, account access token) must NOT use `SUPABASE_ACCESS_TOKEN` / `SUPABASE_DB_PASSWORD` in `app/.env`: the Supabase CLI loads that file for `env()` and would use them over its own login. Better: a password manager.
+9. **Record names** (not values) in `docs/engineering/ENVIRONMENT_VARIABLES.md`: table of Name / Purpose / Public? / Where set.
 
 ## Variables by service
 | Service | Names | Public? | Where set |
@@ -56,7 +57,7 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=...
 # EXPO_PUBLIC_SUPABASE_URL=http://127.0.0.1:<api-port>
 # EXPO_PUBLIC_SUPABASE_ANON_KEY=<local demo anon key from supabase status>
 ```
-Swap protocol for QA: (1) copy `.env` to a backup outside git, (2) swap the blocks, (3) start the bundler, test, (4) restore the backup and prove it is byte-exact with `cmp .env <backup>`, (5) delete the backup only after `cmp` passes. `EXPO_PUBLIC_*` values are inlined at bundle time: restart the bundler after any swap. Alternatively export the two variables in the shell that starts the bundler and leave `.env` untouched.
+Swap protocol for QA: (1) copy `.env` to a backup outside git, (2) swap the blocks, (3) start the bundler, test, (4) restore the backup and prove it is byte-exact with `cmp .env <backup>`, (5) delete the backup only after `cmp` passes. `EXPO_PUBLIC_*` values are inlined at bundle time: restart the bundler after any swap. Alternatively export the two variables in the shell that starts the bundler and leave `.env` untouched. The CLOUD block stays the default for a reason: `eas update` bundles from the local `.env`, not from the `eas.json` build profile, so an OTA shipped while LOCAL is active points every user's app at `127.0.0.1`.
 
 ## Done when
 `.env.example` files match the code's reads, `.gitignore` is correct, every required name is filled (verified by presence, not value), `ENVIRONMENT_VARIABLES.md` lists names and purposes, and no secret appeared in chat.

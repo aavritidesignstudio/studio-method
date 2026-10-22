@@ -29,8 +29,9 @@ If unsure, run section 2's introspection: if the merged manifest or native confi
 
 ## 3. OTA
 1. **Free RAM first:** hermesc needs a few GB for large bundles; it crashed at ~1.6 GB free. Stop the emulator (`adb emu kill`) and the bundler by PID (never all node). Local backend containers can stay.
-2. From the app folder, bare command: `npx -y eas-cli update --channel production --platform android --message "<short>" --non-interactive`. If the permission system blocks it as a production deploy, give the owner the exact command; read the update group id afterwards (`eas update:list`).
-3. Confirm the runtime version matches the store version you target; users get it after opening the app twice.
+2. **Check `.env` points at the cloud backend.** `eas update` bundles `EXPO_PUBLIC_*` from the local `.env` (build-profile `env` in `eas.json` applies to store builds, not to `eas update`). A local URL (`127.0.0.1`) left active ships a broken app to every user. Confirm with `grep -c '^EXPO_PUBLIC_SUPABASE_URL=https://' .env` (must print 1), without printing the value.
+3. From the app folder, bare command: `npx -y eas-cli update --channel production --platform android --message "<short>" --non-interactive`. If the permission system blocks it as a production deploy, give the owner the exact command; read the update group id afterwards (`eas update:list`).
+4. Confirm the runtime version matches the store version you target; users get it after opening the app twice.
 
 ## 4. Log it (same batch as the release)
 1. **Internal** `docs/release/RELEASE_LOG.md`: | date | kind (Play build/OTA) | version/runtime | build or update id | commit | technical what changed |.

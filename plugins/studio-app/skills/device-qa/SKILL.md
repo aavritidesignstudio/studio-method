@@ -19,6 +19,7 @@ Hard rules (from the playbook): demo accounts only; the focused app must be conf
 - **PC mic resets every boot:** `adb -s emulator-5554 emu avd hostmicon`, or voice tests hear nothing. `-allow-host-audio` for voice.
 - Demo-mode status bar for clean screenshots: `adb shell settings put global sysui_demo_allowed 1`, then `am broadcast -a com.android.systemui.demo --es command enter`, then `clock -e hhmm 1000`, `battery -e level 100 -e plugged false`, `network -e wifi show -e level 4`, `notifications -e visible false`; leave with `command exit`.
 - Use `adb exec-out` (never `adb shell`) to pull binary data (shell injects CRLF).
+- **Windows Git Bash rewrites device paths:** `/sdcard/ui.xml` becomes `C:/Program Files/Git/sdcard/ui.xml`, so `uiautomator dump` + `cat` silently return nothing. Prefix those adb calls with `MSYS_NO_PATHCONV=1` (or use PowerShell). MIUI also prints a harmless Java stack trace on `uiautomator dump`; send stderr to null.
 - Bundler for audits: `npx expo start --port 8081 --no-dev --minify`. Do NOT pass `-c` unless the bundle is stale.
 
 ## 3. Point the app at the LOCAL backend
