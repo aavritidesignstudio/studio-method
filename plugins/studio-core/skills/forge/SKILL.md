@@ -28,6 +28,8 @@ Folder `plugins/<pack>/skills/<name>/`:
 - `references/*.md`: the depth (provider setup, click paths, code patterns, policy notes, examples).
 - `scripts/` only for steps that are mechanical and repeat (validate, render, check); reference them relative to the
   skill folder or with `${CLAUDE_PLUGIN_ROOT}`.
+- Everything the plugin needs at run time (templates, schemas, scripts, examples) lives **inside the plugin folder**:
+  an install copies only that folder, so files elsewhere in the repo are missing for users. Keep one copy.
 - Project-neutral: fictional examples, placeholders for ids, "Example (<project>)" labels where a real case helps.
 
 ## 4. Check

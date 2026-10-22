@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.1 — 2026-10-22
+- **studio-core 0.1.5:** rules "Run a plugin installed mid-session headless, with explicit tools", "When asked for a tool, show the tool", "Don't drive the owner's browser unasked"; forge: everything a plugin needs lives inside the plugin folder.
+
 ## 0.2.0 — 2026-10-22
 - **studio-services 0.2.0 · new skill `email-system`** (from WowTodo, proven live): one shared sender, versioned templates
   edited in the admin panel (draft · test · publish · restore), replies on a Resend receiving subdomain that land in the

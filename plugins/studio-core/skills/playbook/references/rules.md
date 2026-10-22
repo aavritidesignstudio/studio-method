@@ -205,3 +205,19 @@
 **Rule:** Any "last opened / active / last seen" record must fire when the app comes back to the foreground, not only on launch (once per day is enough).
 **Why:** Android keeps apps alive in the background for days; a launch-only ping missed people who used the app every day.
 **How to apply:** Call the daily ping after the first frame and on every app-state change to "active"; keep the last-sent date on the device so it costs one call a day.
+
+### Run a plugin installed mid-session headless, with explicit tools
+**Rule:** A Claude Code plugin installed during a session is not loaded into that session. Run its skills in a fresh headless process: `claude -p "/<plugin>:<skill> <brief>" --permission-mode acceptEdits --allowedTools "<explicit list>"`.
+**Why:** Without an explicit tool list, a headless run cannot write files and the work silently goes nowhere; the running session cannot see the new skills or agents at all.
+**How to apply:** Allow file tools plus only the read-only shell commands the skill needs (e.g. `Bash(date:*) Bash(git log:*) Bash(node:*)`); never posting or deploy commands. Put the same list wherever an app or script spawns the run. Review the files it wrote before committing.
+
+### When asked for a tool, show the tool
+**Rule:** When the owner asks for a tool, studio or dashboard, the first thing shown is its full working shape in a mockup: real assets from the product, the production flow, the automation and its controls, and how each automated result was made (a trace plus a way to give feedback). Never a page of copy text.
+**Why:** Example (WowTodo): a first "social studio" that was only bios and links read as "just a website"; the agent-driven version with suggestions, traces and an autonomy switch was approved.
+**How to apply:** Start with mockup-lab on the whole flow, grounded in real product data. When the owner says "take the best call", decide UI and policy questions at a sensible middle, record each call with its reason in the decisions file, and ask only what only the owner knows.
+
+### Don't drive the owner's browser unasked
+**Rule:** Don't open or drive the owner's real browser (browser-extension tools) for your own visual checks.
+**Why:** It acts in their signed-in browser; the owner rejected an unasked screenshot run.
+**How to apply:** Verify with headless screenshots (a helper with headless Chrome/Playwright or jsdom click-throughs), or hand the owner the local URL. Ask in one line if the real browser is truly needed.
+
