@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Studio Method · App + Site Kit: build a React Native app and its website, wire the services, ship to the stores, with a working style that never loses context.",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "plugins": [
     {
       "name": "studio-core",
       "source": "./plugins/studio-core",
       "description": "How we work: start or adopt a project, working contract, status and handoff docs, catch-up and check-out, helper agents, mockup-lab, teach, repo hygiene, and the playbook of hard rules and shared words. Harvest keeps the method growing.",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "displayName": "Studio Core · way of working"
     },
     {

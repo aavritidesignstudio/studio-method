@@ -20,6 +20,17 @@ Build notes); real copy from the copy deck; real screenshots embedded as data UR
 demos or screens still to capture. Example taste (WowTodo owner): generous breathing room, minimal (nothing without a purpose),
 app screens lifted with depth and a slow float.
 
+**Hard rule: template first, then reuse it.** The first mockup of each kind in a project (website, app) sets up
+its template. Once the owner agrees it, freeze it as a reusable source, e.g. `docs/product/mockups/src/<kind>.tpl.html`
+with real assets as placeholders (`%%LOGO%%`, `%%IMG_<name>%%`) plus a small build script that embeds them. Every
+later mockup of that kind starts by **copying that template** and changes only the parts in question; it keeps the
+control bar, the collapsible notes column (a Show/Hide notes button), the full-page rendering of the site or app,
+the tokens and the layout. Never rebuild the frame from scratch, never put the site in a box with its own scroll
+bars. If no template exists yet, the first job is to build one and get it agreed. Name the template file in every
+helper brief. List the frozen templates at the top of `docs/product/mockups/README.md`.
+Example (WowTodo): a helper rebuilt a homepage mockup from scratch: the site sat in a box with scroll bars and
+the side panel didn't collapse. The owner rejected it; the redo copied `src/website-home.tpl.html`.
+
 **Hard rule: no code changes while in this skill.** Read code, docs and the emulator freely, but only write the
 mockup file, its artifact and the mockups index. No app code, migrations, cloud writes or builds. Never
 create, share, delete or block anything in a running app; screenshots only.
@@ -56,8 +67,11 @@ changes the design: who it is for, the scope, or the one or two decisions you ca
 
 ## 3. Build the mockup
 
-One self-contained HTML artifact. Follow the Artifact tool's page contract: run its quickstart and its design
-guidance once for a new mockup. Structure, as in the reference:
+One self-contained HTML artifact. **Start from the project's frozen template for this kind** (see the hard rule
+above): copy it, keep its frame, and change only the screens, sections, copy and toggles this mockup is about.
+Only when no template exists yet, build one from the structure below and get it agreed before reusing it. Follow
+the Artifact tool's page contract: run its quickstart and its design guidance once for a new template. Structure,
+as in the reference:
 
 - **Phone (sticky, right; first on narrow screens):**
   - a real-proportion phone frame running the actual screens with sample data;

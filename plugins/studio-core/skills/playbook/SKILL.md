@@ -27,7 +27,7 @@ Hard rules learned the expensive way (lost data, burned build quota, real phone 
 
 ## Quick index (details in rules.md)
 - **Process and safety:** branching (dev to main), ask before push, conservative deploys, no polling the live site, demo accounts only, focus check on real phones, no blanket process kills, no `node_modules` junctions in worktrees, line endings, secrets never in chat or repo, wrong-project MCP check, helper briefs.
-- **UI and product:** no native alerts, keyboard never hides input, quiet secondary controls, no backdrop blur, entry-screen layout, suggest modernisations, mockups before building web sections, library before scratch, no sparkle icon or "AI" wording, admin-toggle pattern, asked-for content gets real expertise.
+- **UI and product:** no native alerts, keyboard never hides input, quiet secondary controls, no backdrop blur, entry-screen layout, suggest modernisations, mockups before building, reuse the frozen mockup template web sections, library before scratch, no sparkle icon or "AI" wording, admin-toggle pattern, asked-for content gets real expertise.
 - **Release and communication:** real dates, release log every release, audience-friendly notes, store-console drafts reviewed, console click-paths checked against docs, built-binary permission check, build quota, paid-tier reminders.
 
 ## Adding a rule

@@ -114,6 +114,11 @@
 **Why:** The owner wants to shape the design before code.
 **How to apply:** Keep every agreed mockup (indexed in a README) so it can become a live demo or a self-playing story later. Build mockups with a scripted flow runner and fictional names.
 
+### Freeze the mockup template, then reuse it
+**Rule:** The first agreed mockup of each kind (website, app) becomes the frozen template. Every later mockup of that kind copies it and changes only the parts in question: same control bar, collapsible notes column, full-page rendering, tokens and layout.
+**Why:** A mockup rebuilt from scratch put the site in a box with scroll bars and a side panel that wouldn't collapse; the owner couldn't picture the real site and rejected it.
+**How to apply:** Keep the template as a source file with asset placeholders and a build script (`docs/product/mockups/src/`). Name it in every helper brief. No template yet: build and agree one first.
+
 ### Library before scratch
 **Rule:** Before hand-building a visual effect or interaction (scroll-drawn lines, connectors, animations), search for a proven open-source library, present 2 or 3 options with trade-offs (include "already installed"), get approval, then build.
 **Why:** Hand-rolled effects looked amateur; libraries do them well.
