@@ -97,6 +97,11 @@ Save a copy to `docs/product/mockups/<slug>.html` in the repo, and add a row to 
 ## 4. Iterate to common ground
 
 - Reply with the link plus at most three lines: what to try first, and the decisions waiting on them.
+- **How decisions are asked.** The user opens the mockup and flips through the toggles. Then ask the open decisions
+  with AskUserQuestion: one question per toggle, with the option labels exactly as the toggle buttons read and a
+  one-line description of each. The user answers there, or skips it and pastes a screenshot of their answered
+  questions; read the picks from the screenshot. If picks arrive blank or missing (e.g. "placement ___"), ask
+  the same questions. Don't guess.
 - On feedback, edit the same file and republish to the **same path**, which keeps the URL. Move each settled
   question from "Decide before we build" into an **Agreed** list in the proposal column. Set the defaults to the
   chosen options, and remove the toggles for decided items.
