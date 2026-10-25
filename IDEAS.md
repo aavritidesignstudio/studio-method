@@ -28,6 +28,7 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 |---|---|---|
 | ✅ device-qa | app | Emulator/phone QA protocol: RAM, demo accounts, focus checks, keyboard-open test, screenshots |
 | ✅ perf-pass | app | Measure → split the cost → fix → re-measure, with a before/after table |
+| perf-audit | app | Audit-first, measure-first production performance and reliability audit before release: startup chain, navigation fetch/render, notification lifecycle per app state, realtime/sync, dormant bugs, a local-first feasibility check and a phone baseline. Writes numbered docs (findings, roadmap, decision matrix, regression matrix, readiness checklist) and changes no code. From WowTodo 2026-10 |
 | security-pass | services | RLS audit, secrets scan, edge-function auth, storage rules, dependency alerts |
 | a11y-pass | app/site | Labels, contrast in both themes, font scaling, screen-reader walk-through, reduced motion |
 | test-plan | core | Smallest useful tests per feature (logic checks, one end-to-end path), what to run before a release |

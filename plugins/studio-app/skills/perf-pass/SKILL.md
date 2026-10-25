@@ -22,6 +22,14 @@ Trace the path from the touch handler to the first painted frame. Look for, in t
 ## 3. Measure (add markers, keep them behind a flag, remove or keep off at the end)
 - JS thread: `performance.now()` at the touch handler entry, before/after each `await`, first render of the target component, first `onLayout`, effect cleanup on unmount. Log with a tag: `console.log('[perf] open:tap', t)` and read `adb logcat -s ReactNativeJS:V | grep "\[perf\]"`.
 - UI thread: Reanimated `runOnUI` / a worklet logging when a shared value reaches its end; or compare with `Choreographer` frame logs / `adb shell dumpsys gfxinfo <pkg> framestats` for janky frames. For deep traces use Perfetto or the React Profiler on a release-like build.
+- **Baseline with no code changes** (use this when markers aren't approved yet, e.g. in an audit):
+  - Load the installed dev client with `npx expo start --dev-client --no-dev --minify`. Treat the results as before/after numbers, not store numbers.
+  - Count requests per action from the local backend's gateway logs (`docker logs --since/--until <api-gateway container>`, e.g. Supabase Kong). This reveals duplicate refetches.
+  - Warm start: `adb shell am start -W`.
+  - Jank: `dumpsys gfxinfo <pkg> reset`, then the gesture, then `dumpsys gfxinfo <pkg>`.
+  - Memory: `dumpsys meminfo <pkg>` before and after 15 open/close cycles.
+  - Visual time: a device-side `screencap` loop timed with the same clock as the tap.
+  - Don't pixel-time cold starts: Android shows a cached snapshot of the last screen. A dev client's cold-start time is mostly the bundle download.
 - Run each scenario **5 times cold and 5 warm**, report median and worst. Same device, same account, same data, not charging-throttled, not while Gradle/Docker is busy.
 
 ## 4. Split the cost
@@ -30,6 +38,7 @@ Table every segment: `tap -> handler` | `handler -> state set` | `state set -> f
 ## 5. Fix menu (apply the smallest that meets the target)
 - **Show first, work after.** Set the visible state optimistically in the handler; start the slow thing (permission, engine, upload) after the first frame (`requestAnimationFrame` / `InteractionManager.runAfterInteractions`), and handle failure by reverting with a toast.
 - **Pre-mount hidden.** Keep heavy panels mounted with `opacity 0` + `pointerEvents none` and toggle a **shared value**, so layout and SVG are already built. Do not branch `cond ? <A/> : <B/>` for expensive subtrees; toggle display.
+- **Cached but slower means render-bound.** If a screen opens slower when its data is cached than when it shows a spinner first, the full render runs in the same JS turn as the navigation push and blocks the slide. Render a light first frame (header plus the first rows, or a skeleton), then the rest after the transition (`runAfterInteractions` / `transitionEnd`). Pre-filling the cache (`initialData`) without this makes the screen slower.
 - **Kill slow animations on the critical path.** Drop or shorten (<= 100 ms, opacity only) entering/layout transitions and veils; set closing values directly (0 ms) instead of `withTiming`.
 - **Memo and stable callbacks.** `React.memo` heavy children; stable handler identities; split a "god hook" so unrelated state does not re-render the screen.
 - **Move high-frequency state to a small store** (shared values for UI-only values like audio level; a tiny external store with selectors for the rest) and throttle (e.g. partial results to ~150 ms).
