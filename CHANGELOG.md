@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.5 — 2026-10-25
+- **studio-core 0.1.9 · playbook:** rules "Clickable things look clickable; presets switch off" and "Keep the screen in the URL".
+- **studio-app 0.1.3 · device-qa:** section 10, phone-width QA of web panels with a mocked API and a simulated keyboard.
+- **IDEAS:** `web-qa` (site).
+
 ## 0.2.4 — 2026-10-25
 - **studio-core 0.1.8 · mockup-lab:** hard rule "the template shows the product as it looks today": examples teach structure only; compare the template with the newest agreed mockup before copying; on a UI change replace the template; old-UI mockups stay untouched as the record, never copied.
 

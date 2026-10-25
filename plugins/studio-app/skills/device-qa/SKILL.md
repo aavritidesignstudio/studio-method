@@ -49,3 +49,6 @@ Light + dark; font scale 1.0 and 1.3 (`adb shell settings put system font_scale 
 
 ## 9. Report (10 lines or fewer)
 Target (emulator/phone, account used) - flows tested - matrix covered - keyboard check done Y/N per input - bugs found with screenshot paths - what was NOT tested - processes left running (PIDs) - `.env` restored (`cmp` ok).
+
+## 10. Web panels (admin, dashboards) without a device
+Headless browser at phone width (390 px) against the dev server pointed at a fake backend URL; route that URL to sample JSON and put a fake session in local storage, so no real data or sign-in is touched. Simulate the keyboard: focus the input, shrink the viewport height by ~300 px, and check the input and its action button are still on screen. Then a real phone once it is live.

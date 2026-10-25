@@ -31,6 +31,7 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | security-pass | services | RLS audit, secrets scan, edge-function auth, storage rules, dependency alerts |
 | a11y-pass | app/site | Labels, contrast in both themes, font scaling, screen-reader walk-through, reduced motion |
 | test-plan | core | Smallest useful tests per feature (logic checks, one end-to-end path), what to run before a release |
+| web-qa | site | Phone-width QA of a signed-in web app or admin panel without a device: headless browser, mocked API (route the backend URL to sample data), fake session in storage, screenshots light + dark, keyboard simulated by shrinking the viewport with the input focused. From WowTodo 2026-10 |
 
 ## 4. Money
 | Skill | Pack | What it does |

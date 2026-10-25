@@ -226,3 +226,12 @@
 **Why:** It acts in their signed-in browser; the owner rejected an unasked screenshot run.
 **How to apply:** Verify with headless screenshots (a helper with headless Chrome/Playwright or jsdom click-throughs), or hand the owner the local URL. Ask in one line if the real browser is truly needed.
 
+### Clickable things look clickable; presets switch off
+**Rule:** Anything that opens a panel or page shows it without saying "click here": a slight lift, soft shadow and border tint on hover, a pointer cursor, and a quiet › after the name (the › carries it on touch screens). A button that applies a preset filter is a toggle: it shows a pressed state and a second tap clears exactly what it set.
+**Why:** Example (WowTodo admin): the owner couldn't tell tester cards opened the person panel, and "Show who I can pick" got stuck on with no way back except undoing five filters by hand.
+**How to apply:** Give every new clickable card, row or list item the hover affordance (inside `@media (hover: hover)`) and the ›. Give preset buttons `aria-pressed`, computed from whether the current filters equal the preset; changing any filter by hand turns it off.
+
+### Keep the screen in the URL
+**Rule:** Web apps and admin panels put the current screen in the URL (`/inbox`, `/people`…), so refresh, Back/Forward and bookmarks keep the user where they were.
+**Why:** Example (WowTodo admin): the screen lived only in memory, so every refresh dropped the owner back on the home screen.
+**How to apply:** Read the screen from `location.pathname` on start (unknown path → home, check with an own-key test, not `in`), `history.pushState` on navigation, and listen to `popstate`. The host must rewrite every path to `index.html`. Deep state (filters, an open panel) can follow later.
