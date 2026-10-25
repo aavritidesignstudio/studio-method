@@ -6,8 +6,8 @@ description: Ideate a feature as an interactive, clickable phone mockup (HTML ar
 # Mockup lab
 
 When shaping a feature, **build a clickable mockup first and agree
-on it together, then implement**. The model for every mockup is the People-merge example
-(Example (WowTodo): `references/example-people-merge.html`). The user
+on it together, then implement**. The model for the process and the page structure is the People-merge example
+(Example (WowTodo): `references/example-people-merge.html`; its look is out of date, never copy its styling). The user
 tapped through it, chose between variants, approved it, and it then became the spec a helper built from. Mockups
 may later be reused on the product website as hands-on feature demos, so build them to be portable.
 
@@ -28,6 +28,16 @@ control bar, the collapsible notes column (a Show/Hide notes button), the full-p
 the tokens and the layout. Never rebuild the frame from scratch, never put the site in a box with its own scroll
 bars. If no template exists yet, the first job is to build one and get it agreed. Name the template file in every
 helper brief. List the frozen templates at the top of `docs/product/mockups/README.md`.
+
+**Hard rule: the template shows the product as it looks today.** The bundled examples teach the structure only
+(phone + controls + proposal column), never the look. Before copying, open the template and the newest agreed
+mockup side by side (headless screenshots are fine): header, logo, navigation, cards and sheets must match the
+current app or site. When the UI changes (new navigation, header, logo), replace the app template with the newest
+agreed mockup that shows the new UI, update the README's frozen-templates table, and move old-UI mockups into
+`docs/product/mockups/archive/` so nobody copies them again.
+Example (WowTodo): an email-invite mockup was copied from the 8 Oct People-merge mockup, which still had the square
+logo and the old mic dock; the app had since moved to the round logo pill and the floating Tasks | Today | People
+bar. The owner rejected it; the redo copied the current People-chats mockup.
 Example (WowTodo): a helper rebuilt a homepage mockup from scratch: the site sat in a box with scroll bars and
 the side panel didn't collapse. The owner rejected it; the redo copied `src/website-home.tpl.html`.
 

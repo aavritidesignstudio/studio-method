@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.4 — 2026-10-25
+- **studio-core 0.1.8 · mockup-lab:** hard rule "the template shows the product as it looks today": examples teach structure only; compare the template with the newest agreed mockup before copying; on a UI change replace the template and archive old-UI mockups.
+
 ## 0.2.1 — 2026-10-22
 - **studio-core 0.1.5:** rules "Run a plugin installed mid-session headless, with explicit tools", "When asked for a tool, show the tool", "Don't drive the owner's browser unasked"; forge: everything a plugin needs lives inside the plugin folder.
 
