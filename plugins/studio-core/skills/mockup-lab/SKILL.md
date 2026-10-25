@@ -33,8 +33,8 @@ helper brief. List the frozen templates at the top of `docs/product/mockups/READ
 (phone + controls + proposal column), never the look. Before copying, open the template and the newest agreed
 mockup side by side (headless screenshots are fine): header, logo, navigation, cards and sheets must match the
 current app or site. When the UI changes (new navigation, header, logo), replace the app template with the newest
-agreed mockup that shows the new UI, update the README's frozen-templates table, and move old-UI mockups into
-`docs/product/mockups/archive/` so nobody copies them again.
+agreed mockup that shows the new UI and update the README's frozen-templates table. Leave old-UI mockups where
+they are, unchanged: they are the record of the process. They are simply never copied again.
 Example (WowTodo): an email-invite mockup was copied from the 8 Oct People-merge mockup, which still had the square
 logo and the old mic dock; the app had since moved to the round logo pill and the floating Tasks | Today | People
 bar. The owner rejected it; the redo copied the current People-chats mockup.
