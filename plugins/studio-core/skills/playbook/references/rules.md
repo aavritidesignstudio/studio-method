@@ -77,6 +77,16 @@
 **Why:** Keeps the main session cheap, reviewable and conflict-free.
 **How to apply:** Check in on helpers about every 5 minutes; review diffs before merging.
 
+### Sharing tables: three checks
+**Rule:** Any table that grants access to another user's record (shares, memberships, invites) needs three database-side checks: (1) on insert, the record really belongs to the person granting access; (2) the recipient can change only their answer (status, note), never other columns such as the record id or owner; (3) end states (removed, declined) can't be undone by the recipient.
+**Why:** Example (WowTodo): row security only checked "the sharer is you", so a former recipient could re-share a task they no longer had, flip "removed" back to "accepted", or point their share at another task id.
+**How to apply:** Audit before building on a sharing feature: write a failing test for each check first, then add one trigger that enforces all three (skip it for the service role and nested system triggers). Keep both directions in the access test suite.
+
+### Test scripts clean up after themselves
+**Rule:** Verification scripts delete every row they create, including side effects such as notifications, before and after they run, so a second run passes without a database reset.
+**Why:** Example (WowTodo): a check counted notification rows left over from an earlier run and failed on every run after the first, which looked like a regression.
+**How to apply:** Each test section has a cleanup that covers the rows its triggers create, not just the rows it inserts; run every suite twice in a row before trusting it.
+
 ## UI and product
 
 ### No native alerts
@@ -93,6 +103,11 @@
 **Rule:** Only the primary action gets colour. Secondary toggles are icon-only, grey, normal size, with a toast confirming the change. Soft blurred shadows only, never hard lines or bands; check shadows are not clipped by overlays.
 **Why:** Labels and colour on secondary controls read as clutter and compete with the main action.
 **How to apply:** In mockups and real UI, give the main button the accent; make everything else neutral.
+
+### Buttons on one line; compact lists
+**Rule:** Button text never wraps to a second line. Lists stay compact: one row per item, status as a small badge on the avatar (and in words only when it isn't the normal state), a control's label said once (an icon beside a small switch, or a column heading), rare actions behind ⋯.
+**Why:** Example (WowTodo): a dialog button "Remove them too" wrapped to two lines, and a people sheet repeated a status chip and "Can add people" on every person; the compact version was 44% shorter.
+**How to apply:** Shorten the label first and check it in every language. Give the shared dialog a fallback that stacks its buttons full-width when a label is too long for half the width. When a list repeats the same label or chip on every row, offer the compact pattern in the mockup.
 
 ### No backdrop blur or scrim
 **Rule:** Bottom sheets and dialogs lift with one neutral drop shadow and a strong border; the screen behind stays fully clear. No blur view, dark scrim or gradient band behind them. Every sheet pulls down to close from its handle or title (tap outside and Back also close; with the keyboard open the first pull only hides the keyboard).

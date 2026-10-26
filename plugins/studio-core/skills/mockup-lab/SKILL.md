@@ -38,6 +38,14 @@ they are, unchanged: they are the record of the process. They are simply never c
 Example (WowTodo): an email-invite mockup was copied from the 8 Oct People-merge mockup, which still had the square
 logo and the old mic dock; the app had since moved to the round logo pill and the floating Tasks | Today | People
 bar. The owner rejected it; the redo copied the current People-chats mockup.
+
+**Hard rule: copy the whole template, then look once.** Copy every style block and every shared asset of the
+template (a template can keep its CSS in several `<style>` blocks), not just the first one. Before publishing, take
+one headless screenshot of each screen you changed and compare it with the template; fix what differs, then publish.
+A mockup "of what has been built" starts from screenshots of the real screens (emulator or phone), never from the
+plan, or it shows a nicer UI than the one users have.
+Example (WowTodo): a mockup copied only the first of three style blocks and was published with square avatars and
+unstyled rows; its Manage sheet was also drawn from the plan and didn't match the app.
 Example (WowTodo): a helper rebuilt a homepage mockup from scratch: the site sat in a box with scroll bars and
 the side panel didn't collapse. The owner rejected it; the redo copied `src/website-home.tpl.html`.
 
