@@ -25,6 +25,8 @@ Hero (rotating headlines) -> numbered chapters (each: a short claim, a floating 
 ## 4. Mockups as live demos
 - Every agreed mockup is kept (`docs/product/mockups/`, indexed in its README with date and decisions) and reused: strip the proposal/decision panel, keep only the phone, use fictional names, follow the site theme.
 - Publish as static `web/public/demos/<name>.html`; embed in a `DemoStage` with a phone frame (iframe; full screen on phones). Built with a scripted flow runner so an **autoplay story mode** (no visitor input) can be added for screen-recording or embedding.
+- **Story-mode contract** (a demo that plays itself on the page): the page sends `{theme, lang, cmd: "play" | "toggle"}` over postMessage; the demo reports `{cap, beat, n, playing}` back. The page shows `cap` under the phone, lights the step that matches `beat`, and labels its own Play / Pause / Play again button. Autoplay once when the phone is mostly in view and the demo has reported, never with reduced motion. Accept messages only from that iframe's `contentWindow`. Reuse the stage's phone frame so the demo sits raised like the others.
+- **Headless screenshots:** headless Chrome gives blank shots when the page is scrolled to a far section (hide the other sections in a temporary copy instead) and won't go below about 500px wide, so check phone width in the mockup's Phone view or on a real phone.
 - Rule: never delete mockups; swap any real person's name before publishing.
 
 ## 5. Updates page from ONE data file

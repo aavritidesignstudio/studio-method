@@ -27,7 +27,13 @@ later mockup of that kind starts by **copying that template** and changes only t
 control bar, the collapsible notes column (a Show/Hide notes button), the full-page rendering of the site or app,
 the tokens and the layout. Never rebuild the frame from scratch, never put the site in a box with its own scroll
 bars. If no template exists yet, the first job is to build one and get it agreed. Name the template file in every
-helper brief. List the frozen templates at the top of `docs/product/mockups/README.md`.
+helper brief. List the frozen templates at the top of `docs/product/mockups/README.md`. The web template moves
+forward with the live site: once a web mockup is agreed and built, its source becomes the newest template (copy the
+newest, never the first), and the README names it.
+
+**Website mockups with live demos:** when the page shows the site's demos in iframes, publish those demo files with
+the page (Artifact `files`, e.g. `demos/<name>.html`), or the phones render blank. Each demo file is served without
+a skeleton, so it needs its own `<!doctype html>`, `<meta charset="utf-8">` and viewport, or its text garbles.
 
 **Hard rule: the template shows the product as it looks today.** The bundled examples teach the structure only
 (phone + controls + proposal column), never the look. Before copying, open the template and the newest agreed
