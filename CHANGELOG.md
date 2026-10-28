@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.7 — 2026-10-28
+- **studio-core 0.1.12 · playbook:** rule "Ship the client before the server requires a field".
+- **studio-site 0.1.2 · site-builder:** anchor links land on the first click (no ScrollTrigger refresh mid-scroll, reserve late/animated heights, one re-land on near miss, headless check); must-have signup answers go in the form itself, required.
+
 ## 0.2.5 — 2026-10-25
 - **studio-core 0.1.9 · playbook:** rules "Clickable things look clickable; presets switch off" and "Keep the screen in the URL".
 - **studio-app 0.1.3 · device-qa:** section 10, phone-width QA of web panels with a mocked API and a simulated keyboard.

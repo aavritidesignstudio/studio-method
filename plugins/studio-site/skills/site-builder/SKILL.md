@@ -22,6 +22,13 @@ Vite + React 19 + TypeScript + Tailwind 4 (`@tailwindcss/vite`) + react-router-d
 ## 3. Home page: story-led
 Hero (rotating headlines) -> numbered chapters (each: a short claim, a floating app screen or live demo, one line of proof) -> **What's new strip** (latest 2 or 3 updates, link to /updates) -> use cases / stories -> closing CTA (store badge or waitlist). One 1100px content width; header inside it. Each chapter is a file in `src/sections/`; `Home.tsx` only composes them. Chapter threads (a line that draws as you scroll) use GSAP.
 
+**Anchor links must land on the first click.** A smooth `#section` scroll stops short or halfway when the page changes under it:
+- `ScrollTrigger.refresh()` jumps the page to measure, which cancels a smooth scroll. Rebuild or refresh only after scrolling has been still for about 200 ms.
+- Anything that loads near the viewport or animates (live demos, lazy blocks) reserves its tallest height, so the page height never changes.
+- Header links scroll a second time on `scrollend` when they land within one screen of the target, so a late font or image can't leave them short.
+
+Check headless: click once and read the target's `getBoundingClientRect().top` (it should equal `scroll-padding-top`) and `document.body.scrollHeight` (it should not change). Do this at phone and desktop widths.
+
 ## 4. Mockups as live demos
 - Every agreed mockup is kept (`docs/product/mockups/`, indexed in its README with date and decisions) and reused: strip the proposal/decision panel, keep only the phone, use fictional names, follow the site theme.
 - Publish as static `web/public/demos/<name>.html`; embed in a `DemoStage` with a phone frame (iframe; full screen on phones). Built with a scripted flow runner so an **autoplay story mode** (no visitor input) can be added for screen-recording or embedding.
@@ -33,7 +40,7 @@ Hero (rotating headlines) -> numbered chapters (each: a short claim, a floating 
 `src/data/updates.ts`, newest first; a release is one new entry at the top. Shape in the `site-updates` skill (`references/updates-data.md`); writing each entry after a release is that skill's job. Same text mirrors `docs/release/WHATS_NEW.md`. Real date (`date`), audience-friendly words, `version` for store builds vs `needs` for OTAs. A config constant (`UPDATES_STOPS: "day" | "month"`) selects timeline grouping (admin-toggle pattern).
 
 ## 6. Waitlist and contact
-Form -> Turnstile -> Supabase edge function `waitlist` (`verify_jwt=false`; origin allow-list, Turnstile, quotas) -> row + double opt-in email via Resend; confirm and remove pages are `noindex`. Setup: stack-guide `email.md`. Never send to real users without the owner's OK.
+Form -> Turnstile -> Supabase edge function `waitlist` (`verify_jwt=false`; origin allow-list, Turnstile, quotas) -> row + double opt-in email via Resend; confirm and remove pages are `noindex`. Setup: stack-guide `email.md`. Never send to real users without the owner's OK. Any answer you must have for every signup (e.g. Android or iPhone) goes in the sign-up form itself, required, and the server refuses a join without it. Only nice-to-know questions go in the optional step after sign-up, because many people skip it. On phones the CTA lands with the email field in view: heading, then the form, then the details.
 
 ## 7. Screenshots
 Capture real screens from the app running with demo data (fictional names), light and dark, same device frame. Export **webp**, sized for display (max about 1200 px wide for hero, 600 px for floating), `loading="lazy"` below the fold, explicit width/height to avoid layout shift. Store file naming: `web/public/screens/<feature>-<light|dark>.webp`. Store listing slides are a separate job (`store-listing-kit` skill).
@@ -45,4 +52,4 @@ Per-route title (under 60 chars), description (under 160), canonical, OG + Twitt
 `npm run lint && npm run build` -> ask the owner -> merge `dev` to `main` -> push -> the owner checks in a private window (do not curl-poll). Then a release-log entry if it announces an app release.
 
 ## Checklist per change
-Mockup asked and agreed - library approved - fictional names - no "AI" up front - dark mode checked - 360px checked - reduced motion - real dates - SEO check passes.
+Mockup asked and agreed - anchor links land on the first click (phone + desktop) - library approved - fictional names - no "AI" up front - dark mode checked - 360px checked - reduced motion - real dates - SEO check passes.

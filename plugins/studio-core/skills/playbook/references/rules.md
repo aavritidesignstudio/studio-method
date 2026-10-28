@@ -250,3 +250,8 @@
 **Rule:** Web apps and admin panels put the current screen in the URL (`/inbox`, `/people`…), so refresh, Back/Forward and bookmarks keep the user where they were.
 **Why:** Example (WowTodo admin): the screen lived only in memory, so every refresh dropped the owner back on the home screen.
 **How to apply:** Read the screen from `location.pathname` on start (unknown path → home, check with an own-key test, not `in`), `history.pushState` on navigation, and listen to `popstate`. The host must rewrite every path to `index.html`. Deep state (filters, an open panel) can follow later.
+
+### Ship the client before the server requires a field
+**Rule:** When a server endpoint starts requiring a new field, ship the client that sends it first. Deploy the server only after the client is live.
+**Why:** Example (WowTodo waitlist): the function was made to refuse sign-ups without a phone choice. If it had gone live before the website, every sign-up would have failed until the site deployed.
+**How to apply:** Push the client, then confirm it is live with one page load. Then deploy the server and send one request that leaves the field out; it should be refused with the new error code. Write the order into the handoff and the deploy steps.
