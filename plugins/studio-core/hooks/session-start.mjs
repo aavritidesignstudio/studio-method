@@ -30,20 +30,27 @@ try {
   const find = (names) => {
     for (const d of dirs) for (const n of names) { const p = join(d, n); if (existsSync(p)) return p; }
   };
-  const field = (text, label) => {
+  // label as bold "**X:**" / "**X (note):**" or as a heading "## X"; value = rest of line, else first non-empty line below
+  const field = (text, labels) => {
+    const L = labels.join("|");
+    const bold = new RegExp(String.raw`\*\*\s*(?:${L})\b[^*]*\*\*:?\s*(.*)$`, "i");
+    const head = new RegExp(String.raw`^#{1,6}\s*(?:${L})\b`, "i");
     const lines = text.split(/\r?\n/);
-    const i = lines.findIndex((l) => l.includes(`**${label}:**`));
-    if (i < 0) return "";
-    let v = clean(lines[i].split(`**${label}:**`)[1] || "");
-    for (let j = i + 1; !v && j < lines.length && j < i + 4; j++) v = clean(lines[j]);
-    return v.startsWith("<") ? "" : v;
+    for (let i = 0; i < lines.length; i++) {
+      const m = lines[i].match(bold);
+      if (!m && !head.test(lines[i])) continue;
+      let v = clean(m ? m[1] : "");
+      for (let j = i + 1; !v && j < lines.length && j < i + 5; j++) v = clean(lines[j]);
+      if (v && !v.startsWith("<") && !v.startsWith("#")) return v;
+    }
+    return "";
   };
 
   const lines = [];
   const h = find(["HANDOFF.md"]);
   if (h) {
     const t = readFileSync(h, "utf8");
-    const stop = field(t, "Stopped at"), next = field(t, "Next step");
+    const stop = field(t, ["Stopped at"]), next = field(t, ["Next step", "Next session", "Next up", "Next"]);
     if (stop || next) {
       const age = Math.floor((Date.now() - statSync(h).mtimeMs) / 86400000);
       lines.push(`Handoff ${h} (${age} days old)`);
