@@ -1,6 +1,6 @@
 ---
 name: working-contract
-description: A standing way of working that applies to every session in any project. Covers the three project docs (status, handoff, working contract), Opus-plans / Sonnet-executes delegation, helper-agent check-ins and commits, usage-percentage limits, and token-lean communication. Use at the start of every session, whenever delegating to subagents, when the user reports a usage percentage, before committing, and when asked for a handoff.
+description: MUST be loaded first in every session, before any other tool call - the standing way of working in any project, and the rule that the main session never executes (it plans, audits, reviews, monitors; Sonnet helpers do the work). Covers the status/handoff/contract docs, helper briefs and commits, usage-percentage limits and token-lean communication. Use at the start of every session, whenever delegating, when the user reports a usage percentage, before committing, and when asked for a handoff.
 ---
 
 # Working contract
@@ -8,6 +8,15 @@ description: A standing way of working that applies to every session in any proj
 Goal: low token cost, and no lost work across sessions or helper agents.
 
 Hard rules and shared words live in the `playbook` skill (studio-core); load it with this one.
+
+## 0. Hard rule: the main session never executes
+- Main session = plan, audit, review, monitor, decide, talk to the owner.
+- It does NOT: edit code or feature docs, run device/emulator work or setup, build mockups, write test scripts,
+  do broad searches, or run long builds. Brief a Sonnet helper (background) for all of that.
+- Allowed: read files/logs to plan or review, run checks to verify a helper's result, edit status/handoff/memory,
+  run pushes and deploys the owner approved.
+- Self-check before every action: "Is this execution? Then brief a helper."
+- Update the status doc in every commit (see section 2).
 
 ## 1. Session start
 1. Look for the three docs (default `docs/`). Match existing equivalents first. A status file may be named
@@ -26,9 +35,10 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
   without this skill. Add project-specific overrides there.
 
 ## 3. Roles
-- The main session (Opus) **plans, reviews, audits** and decides.
-- **Sonnet subagents** do code execution and exploration (`model: "sonnet"`, run in background).
-- Don't do bulk coding or broad searching in the main session when a helper can do it.
+- The main session (Opus) **plans, reviews, audits, monitors** and decides (section 0).
+- **Sonnet subagents** do all execution and exploration (`model: "sonnet"`, run in background).
+- No bulk coding, device work, mockups or broad searching in the main session. The only exception is a change of a
+  line or two that briefing a helper would cost more than doing.
 
 ## 4. Helper agents
 - **Brief** each helper with: the goal, the files in scope, what "done" means, and its notes path.

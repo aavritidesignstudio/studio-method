@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.8 — 2026-10-29
+- **studio-core 0.1.14 · working-contract:** hard rule 0, the main session never executes (plans, audits, reviews, monitors; helpers execute); loaded first in every session. Playbook rule "Main session orchestrates; helpers execute". New session-start hook (startup, resume, clear, compact) that reminds every session to load working-contract + playbook.
+
 ## 0.2.7 — 2026-10-28
 - **studio-core 0.1.12 · playbook:** rule "Ship the client before the server requires a field".
 - **studio-site 0.1.2 · site-builder:** anchor links land on the first click (no ScrollTrigger refresh mid-scroll, reserve late/animated heights, one re-land on near miss, headless check); must-have signup answers go in the form itself, required.

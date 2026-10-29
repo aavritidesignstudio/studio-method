@@ -76,4 +76,4 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | ✅ harvest | core | Lessons from any project back into the method, owner-approved |
 | ✅ forge | core | Build or improve a skill in the method repo |
 | web-method | core | Variant of studio-start for web-only products (Next.js or Vite, no app) |
-| hooks | core | Optional hooks: session-start "due" reminders (repo clean, release notes), commit-message checks |
+| hooks | core | STARTED (0.1.14: session-start working-contract reminder). Optional hooks: session-start "due" reminders (repo clean, release notes), commit-message checks |
