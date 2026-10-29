@@ -87,12 +87,27 @@
 **Why:** Example (WowTodo): a check counted notification rows left over from an earlier run and failed on every run after the first, which looked like a regression.
 **How to apply:** Each test section has a cleanup that covers the rows its triggers create, not just the rows it inserts; run every suite twice in a row before trusting it.
 
+### Stages only move forward
+**Rule:** In any pipeline with stages (waitlist → picked → invited → … → installed), a self-serve step the person takes (confirm email, answer a form, click an old link) may only promote from the exact earlier state; it never overwrites a later stage. An automatic promotion (e.g. "installed once they sign in") accepts every earlier stage, not just the one before it.
+**Why:** Example (WowTodo): confirming an email always set "qualified", so testers the owner had already picked or invited fell back to the waitlist and the batch invite looked broken. And "installed" only fired from "added on Play", so people the owner added by hand stayed stuck in Picked although they were using the app.
+**How to apply:** Write the promote condition as `current === expected_previous`, not "has this field". Owners do steps out of band (store console, manual emails), so a sync that detects the end state should jump from any earlier stage. Add a test: put the record in a later stage, replay every self-serve action, assert the stage is unchanged.
+
+### Prove the test catches the bug
+**Rule:** A bug fix in a multi-step flow ships with an end-to-end run of the whole journey, and that run is shown to fail on the old code before it is trusted.
+**Why:** Example (WowTodo): the tester-journey run passed 21/21 with the fix and failed 10 checks on the old code, exactly the symptoms the owner saw, so the fix was proven, not guessed.
+**How to apply:** Run the real handlers against the LOCAL backend with demo accounts; inject the email sender as an in-memory mailbox (never a real provider) and read links/tokens from the captured mails. Then stash the fix (`git stash push -- <files>`), rerun, confirm the failures, and pop it back. Clean up every row and account the run made.
+
 ## UI and product
 
 ### No native alerts
 **Rule:** No `Alert.alert` or any system-styled popup. Confirmations use the design-system confirm dialog; success/info/errors use the in-app toast. An editing screen returns to view mode after save with no "Success" popup.
 **Why:** System popups break UI continuity and trust is withdrawn immediately.
 **How to apply:** Grep new screens for `Alert.alert`; put it in UI helper briefs.
+
+### Bulk results name who; "now" means now
+**Rule:** A bulk action (send to 5, mark 10) reports who failed and why in plain words ("Asha, Dev: email not confirmed yet"), not a count with a code. A button labelled "now" skips schedule windows that exist for the background job. Held or skipped items are shown with the reason, never a bare "sent: 0".
+**Why:** Example (WowTodo): "Send invite to 5" sent one and showed "1 done, 4 not: Email not confirmed yet" with no names, and "Send reminders now" silently held everything outside its 10–12 window; the owner could not tell what had happened.
+**How to apply:** Bulk endpoints return per-item results (id, ok, code); the UI maps ids to names. Buttons count only the items that can act ("Send invite to 3", with a label on the others saying why). Manual triggers pass a flag that bypasses the cron window; the toast includes held and skipped counts.
 
 ### The keyboard never hides the input
 **Rule:** Wherever a keyboard opens (screens, sheets, dialogs, inline edits) the focused input AND the button that acts on it (Save, Send, Add) stay visible above the keyboard.
