@@ -5,6 +5,8 @@ description: Give the user a 4–5 line snapshot of where the project was left, 
 
 # Catch up
 
+The session-start hook already gives a light catch-up (handoff next step + status line) every session; this skill is the full snapshot + menu.
+
 Goal: the user is starting a session and wants to know, in seconds, where things stand. Keep it cheap.
 
 ## 1. Read (only what's needed)

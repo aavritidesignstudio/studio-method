@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.2.8 — 2026-10-29
-- **studio-core 0.1.14 · working-contract:** hard rule 0, the main session never executes (plans, audits, reviews, monitors; helpers execute); loaded first in every session. Playbook rule "Main session orchestrates; helpers execute". New session-start hook (startup, resume, clear, compact) that reminds every session to load working-contract + playbook.
+- **studio-core 0.1.14 · working-contract:** hard rule 0, the main session never executes (plans, audits, reviews, monitors; helpers execute); loaded first in every session. Playbook rule "Main session orchestrates; helpers execute". New session-start hook (startup, resume, clear, compact) that reminds every session to load working-contract + playbook, and gives a light catch-up (handoff Stopped at / Next step + age, status Updated line) so a session that opens with a task still knows where things stand.
 
 ## 0.2.7 — 2026-10-28
 - **studio-core 0.1.12 · playbook:** rule "Ship the client before the server requires a field".
