@@ -37,8 +37,7 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
 ## 3. Roles
 - The main session (Opus) **plans, reviews, audits, monitors** and decides (section 0).
 - **Sonnet subagents** do all execution and exploration (`model: "sonnet"`, run in background).
-- No bulk coding, device work, mockups or broad searching in the main session. The only exception is a change of a
-  line or two that briefing a helper would cost more than doing.
+- No bulk coding, device work, mockups or broad searching in the main session. No exceptions.
 
 ## 4. Helper agents
 - **Brief** each helper with: the goal, the files in scope, what "done" means, and its notes path.
