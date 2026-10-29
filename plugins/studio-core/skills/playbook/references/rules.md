@@ -3,9 +3,9 @@
 ## Process and safety
 
 ### Main session orchestrates; helpers execute
-**Rule:** The main session plans, audits, reviews and monitors. All execution (code, device work, mockups, test scripts, broad searches, long builds) goes to Sonnet helpers.
+**Rule:** The main session plans, audits, reviews and monitors. Real work (features, multi-file changes, exploration, device work, mockups, test scripts, broad searches, long builds) goes to Sonnet helpers. Tiny, already-understood changes (about 10 lines, one or two files) it does itself. The goal is the fewest tokens, not delegation for its own sake.
 **Why:** A session that loaded nothing did the work itself, skipped the status updates and cost the owner's trust.
-**How to apply:** Load `working-contract` and `playbook` before any other tool call (the studio-core session-start hook reminds you). Before every action ask: "Is this execution? Then brief a helper." Update the status doc in every commit.
+**How to apply:** Load `working-contract` and `playbook` before any other tool call (the studio-core session-start hook reminds you). Before every action ask: "Real work? Brief a helper. Tiny? Just do it." Example (WowTodo): a helper brief for a one-line label colour cost more than the fix. Update the status doc in every commit.
 
 ### Branch flow: work on dev, only dev merges to main
 **Rule:** All work happens on `dev` or on feature branches cut from `dev` (`feat/...`, `fix/...`). Confirmed work merges into `dev`; only `dev` merges into `main`. Never commit to `main` directly.

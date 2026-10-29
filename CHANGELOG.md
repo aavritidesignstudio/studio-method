@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.9 — 2026-10-29
+- **studio-core 0.1.15 · working-contract, playbook, session-start hook:** rule 0 is about the fewest tokens: real work goes to Sonnet helpers, tiny already-understood changes (about 10 lines, one or two files) the main session does itself.
+
 ## 0.2.8 — 2026-10-29
 - **studio-core 0.1.14 · working-contract:** hard rule 0, the main session never executes (plans, audits, reviews, monitors; helpers execute); loaded first in every session. Playbook rule "Main session orchestrates; helpers execute". New session-start hook (startup, resume, clear, compact) that reminds every session to load working-contract + playbook, and gives a light catch-up (handoff Stopped at / Next step + age, status Updated line) so a session that opens with a task still knows where things stand.
 

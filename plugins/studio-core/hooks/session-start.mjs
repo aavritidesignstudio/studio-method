@@ -6,8 +6,8 @@ import { join } from "node:path";
 const out = [
   "Studio Method rules for this session:",
   "- Load the working-contract and playbook skills now, before any other tool call.",
-  "- The main session plans, audits, reviews and monitors; all execution goes to Sonnet helpers (background).",
-  '- Before every action ask: "Is this execution? Then brief a helper." Update the status doc in every commit.',
+  "- The main session plans, audits, reviews and monitors; real work goes to Sonnet helpers (background); tiny changes (~10 lines) it does itself. Goal: fewest tokens.",
+  '- Before every action ask: "Real work? Brief a helper. Tiny? Just do it." Update the status doc in every commit.',
 ];
 const cut = (s, n = 200) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
 const clean = (s) => s.replace(/\*\*/g, "").replace(/\s+/g, " ").trim();

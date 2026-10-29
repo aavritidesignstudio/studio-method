@@ -1,6 +1,6 @@
 ---
 name: working-contract
-description: MUST be loaded first in every session, before any other tool call - the standing way of working in any project, and the rule that the main session never executes (it plans, audits, reviews, monitors; Sonnet helpers do the work). Covers the status/handoff/contract docs, helper briefs and commits, usage-percentage limits and token-lean communication. Use at the start of every session, whenever delegating, when the user reports a usage percentage, before committing, and when asked for a handoff.
+description: MUST be loaded first in every session, before any other tool call - the standing way of working in any project, and the rule that the main session orchestrates for the fewest tokens (it plans, audits, reviews, monitors; Sonnet helpers do the real work; tiny changes it does itself). Covers the status/handoff/contract docs, helper briefs and commits, usage-percentage limits and token-lean communication. Use at the start of every session, whenever delegating, when the user reports a usage percentage, before committing, and when asked for a handoff.
 ---
 
 # Working contract
@@ -9,13 +9,15 @@ Goal: low token cost, and no lost work across sessions or helper agents.
 
 Hard rules and shared words live in the `playbook` skill (studio-core); load it with this one.
 
-## 0. Hard rule: the main session never executes
+## 0. Hard rule: the main session orchestrates; the goal is fewest tokens
 - Main session = plan, audit, review, monitor, decide, talk to the owner.
-- It does NOT: edit code or feature docs, run device/emulator work or setup, build mockups, write test scripts,
-  do broad searches, or run long builds. Brief a Sonnet helper (background) for all of that.
-- Allowed: read files/logs to plan or review, run checks to verify a helper's result, edit status/handoff/memory,
+- Real work goes to a Sonnet helper (background): features, multi-file changes, anything needing exploration,
+  device/emulator work or setup, mockups, test scripts, broad searches, long builds.
+- Small, already-understood changes (about 10 lines or fewer, one or two files, no searching needed) the main session
+  does itself: writing a brief would cost more tokens than the change.
+- Always allowed: read files/logs to plan or review, run checks to verify a helper's result, edit status/handoff/memory,
   run pushes and deploys the owner approved.
-- Self-check before every action: "Is this execution? Then brief a helper."
+- Self-check before every action: "Is this real work? Then brief a helper. Is it tiny? Just do it."
 - Update the status doc in every commit (see section 2).
 
 ## 1. Session start
@@ -37,7 +39,7 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
 ## 3. Roles
 - The main session (Opus) **plans, reviews, audits, monitors** and decides (section 0).
 - **Sonnet subagents** do all execution and exploration (`model: "sonnet"`, run in background).
-- No bulk coding, device work, mockups or broad searching in the main session. No exceptions.
+- No bulk coding, device work, mockups or broad searching in the main session; tiny changes per section 0 are fine.
 
 ## 4. Helper agents
 - **Brief** each helper with: the goal, the files in scope, what "done" means, and its notes path.
