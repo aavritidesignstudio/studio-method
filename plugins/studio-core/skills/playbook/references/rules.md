@@ -275,3 +275,8 @@
 **Rule:** When a server endpoint starts requiring a new field, ship the client that sends it first. Deploy the server only after the client is live.
 **Why:** Example (WowTodo waitlist): the function was made to refuse sign-ups without a phone choice. If it had gone live before the website, every sign-up would have failed until the site deployed.
 **How to apply:** Push the client, then confirm it is live with one page load. Then deploy the server and send one request that leaves the field out; it should be refused with the new error code. Write the order into the handoff and the deploy steps.
+
+### Keep a test ledger; don't repeat what passed
+**Rule:** Record which screens and flows passed a repeatable check, and retest only what is new, changed, failed or never tested.
+**Why:** Example (WowTodo): each QA brief repeated the full keyboard list, so the same passed sheets were tested again and again while the owner waited.
+**How to apply:** Keep one small table in the repo: item, result, date, evidence. Put it in every QA brief and tell helpers not to retest passed rows. When a shared component changes, test a small sample and go wider only if a sample fails. Sample the final release build too, since it is a different build type.
