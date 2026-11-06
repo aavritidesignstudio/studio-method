@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.11 — 2026-11-07
+- **studio-core 0.1.18 · playbook, working-contract:** rule "Moving DNS to Cloudflare: change nothing first"; helpers can hand back silently, so check git and notes before saying you're waiting.
+- **studio-site 0.1.4 · site-builder:** showcase screenshots of live sites in light and dark pairs, whole visuals, widgets in use, theme notice for dark-only work.
+- **IDEAS:** product-film (narrated demo videos with Remotion).
+
 ## 0.2.10 — 2026-11-06
 - **studio-core 0.1.17 · playbook:** rules "Vercel free plan + private repo: commits must come from the account owner" and "Crisp, smooth rendering on every device".
 - **studio-site 0.1.3 · site-builder:** click-test header toggles; `all: unset` resets `pointer-events` inside a click-through header.

@@ -51,6 +51,9 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
   and deletes the note.
 - **Check-ins** every ~5 minutes while helpers run (use a recurring timer if the session has one; cancel it when
   they're done). Ask: what's done, what's left, last commit? Nudge a commit if it's overdue.
+- **Silent hand-backs.** A helper can stop without a report or a commit. When a completion notice arrives with no
+  report, check `git log`, `git status` and its notes right away, then finish the work or re-brief. Never tell the
+  owner you are "waiting" on a helper you have not confirmed is running.
 - Parallel helpers must touch non-overlapping files; otherwise run them one after another.
 - **No AI attribution** in commits or PRs (no `Co-Authored-By: Claude` lines) is the default. Put it in every helper brief.
   A project may override this in its `WORKING_CONTRACT.md` under `## Project overrides`; follow the override if present.

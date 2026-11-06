@@ -8,6 +8,7 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 |---|---|---|
 | ✅ mockup-lab | core | Clickable phone or website mockup with sample data, agreed before any code |
 | brand-kit | site | Logo, colour tokens (light + dark), type pair, app icon, splash and favicon set from one brief |
+| product-film | site | Narrated product demo videos: scripted capture (Playwright for sites, emulator for apps), assembled in Remotion with frames, captions and a text-to-speech voice (from Aavriti, 2026-11) |
 | copy-deck | core | Product copy in every language from one source: tone, banned words, UI strings, store and site text |
 
 ## 2. Start and build

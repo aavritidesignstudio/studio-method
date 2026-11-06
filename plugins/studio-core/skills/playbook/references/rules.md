@@ -290,3 +290,8 @@
 **Rule:** Record which screens and flows passed a repeatable check, and retest only what is new, changed, failed or never tested.
 **Why:** Example (WowTodo): each QA brief repeated the full keyboard list, so the same passed sheets were tested again and again while the owner waited.
 **How to apply:** Keep one small table in the repo: item, result, date, evidence. Put it in every QA brief and tell helpers not to retest passed rows. When a shared component changes, test a small sample and go wider only if a sample fails. Sample the final release build too, since it is a different build type.
+
+### Moving DNS to Cloudflare: change nothing first
+**Rule:** Move the nameservers first with every record copied exactly and set to DNS only (grey cloud). Point anything at a new host only after the move is active.
+**Why:** Example (Aavriti): Cloudflare's import scan missed a live subdomain, and turned on the proxy for cPanel, mail and FTP records by default. The MX record pointed at the apex, so moving the apex to a new web host would have broken mail.
+**How to apply:** Before the switch, list the public records (`nslookup`/`Resolve-DnsName` for the apex, `www`, mail and known subdomains), compare them with the old panel's zone list and add what the scan missed. Check the registrar for DNSSEC (it must be off before the switch). After the switch, query the new nameserver directly to confirm identical answers. If MX points at the apex, give mail its own A record and point MX there before the apex moves. Expect public resolvers to cache the old nameservers for up to a day; a new subdomain can be added at both providers meanwhile.
