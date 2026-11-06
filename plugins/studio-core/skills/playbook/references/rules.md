@@ -27,6 +27,11 @@
 **Why:** Without it every push rebuilds every project: wasted build minutes, and surprise production deploys of a site nobody touched.
 **How to apply:** Add the `ignoreCommand` from stack-guide `vercel.md` when creating each new Vercel project; test it on two past commits (one touching the folder, one not) before merging to the deploy branch.
 
+### Vercel free plan + private repo: commits must come from the account owner
+**Rule:** On Vercel's Hobby plan, a private Git repo deploys only commits whose author maps to the Vercel account owner's Git account. Any other author gets "Deployment was blocked: Git author ... must have access to the project". A CLI deploy from the same folder is blocked too, because it sends the commit metadata.
+**Why:** A public repo that deployed fine stopped deploying the moment it was made private; the studio's commit identity was not the Vercel owner's GitHub account.
+**How to apply:** Before making a Vercel-connected repo private, set that repo's local author to the owner's GitHub identity (`git config --local user.email <id>+<login>@users.noreply.github.com`, from `gh api user --jq .id`) and confirm with the owner. Read the reason from the commit status (`gh api repos/<o>/<r>/commits/<sha>/statuses`), not by retrying.
+
 ### Do not poll the live site
 **Rule:** After a push, do not curl the production site in a loop waiting for the new build.
 **Why:** It looks like deploy activity to the permission classifier and gets denied; it is also noisy.
@@ -133,6 +138,11 @@
 **Rule:** Bottom sheets and dialogs lift with one neutral drop shadow and a strong border; the screen behind stays fully clear. No blur view, dark scrim or gradient band behind them. Every sheet pulls down to close from its handle or title (tap outside and Back also close; with the keyboard open the first pull only hides the keyboard).
 **Why:** Real Android blur stuttered on a mid-range phone, stacked blur strips looked stepped, and a scrim hides context.
 **How to apply:** Reuse the shared sheet/dialog components. If separation is weak in dark mode, adjust surface colour or border, not blur. Ask before touching existing cheap blur (chat bars, toasts).
+
+### Crisp, smooth rendering on every device
+**Rule:** Curved edges are drawn smooth (no facets, steps or polygon corners), lines render crisp on phones too, and repeating mechanisms (iris blades, gear teeth) look identical from every side. In WebGL, never turn anti-aliasing off on phones or drop below the screen's pixel ratio (cap at 2) to save speed; shed shadows and effects first.
+**Why:** Example (studio site): `antialias: !phone` and an adaptive pixel ratio of 0.75 made the 3D edges stair-step badly on phones; straight-segment outlines faceted curved bevels; stacked iris blades overlapped differently on one side. The owner made all three standing rules.
+**How to apply:** Build curved outlines from real curves sampled densely, use creased/smooth normals, give thin rings enough segments, make cyclic overlaps truly cyclic (tilt each blade). Check close-up crops at a phone viewport (DPR 3) before showing the owner. Drop `will-change: transform` on scaled SVG/DOM art once motion settles so it re-rasterizes sharp.
 
 ### Entry screens: pinned, predictable layout
 **Rule:** A visible back button on the left and compact actions on the right in ONE pinned row, in the same place across modes and tabs (pinned above the keyboard). Slim segmented toggles; reuse existing primitives. Quiet context (a muted date line) is welcome.

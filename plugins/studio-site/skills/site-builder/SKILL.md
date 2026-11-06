@@ -16,7 +16,7 @@ Vite + React 19 + TypeScript + Tailwind 4 (`@tailwindcss/vite`) + react-router-d
 - Roomy, minimal, lifted cards, big type with one accent phrase, app screens floating with depth, one signature texture (e.g. concentric rings) reused for quiet depth.
 - Light and dark parity. Logo shape per the project rule (circular pre-cut PNGs + `rounded-full`).
 - No sparkle/"AI" icons; no "AI" in the hero copy. Never claim a feature you have not verified (keep a FEATURE_CLAIMS doc and check copy against it).
-- Header holds quick toggles (theme, language) one tap away, not hidden inside the menu.
+- Header holds quick toggles (theme, language) one tap away, not hidden inside the menu. Click-test each one: in a click-through header (`pointer-events: none` with children set back to `auto`), a button styled with `all: unset` resets `pointer-events` to the inherited `none` and silently stops working; add `pointer-events: auto` after the reset.
 - Responsive from phone width; test 360, 768, 1280. Respect `prefers-reduced-motion` (still frames).
 
 ## 3. Home page: story-led
