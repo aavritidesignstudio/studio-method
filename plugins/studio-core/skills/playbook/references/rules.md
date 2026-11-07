@@ -87,6 +87,11 @@
 **Why:** Keeps the main session cheap, reviewable and conflict-free.
 **How to apply:** Check in on helpers about every 5 minutes; review diffs before merging.
 
+### Helper hygiene in a shared worktree
+**Rule:** Parallel helpers in one worktree stage files by explicit path (never `git add -A` or `.`), and a helper that runs a generator commits every file it regenerated. Before reporting, a helper proves its server port is closed (`netstat`), not just that it sent a stop.
+**Why:** A generator rewrote files that no commit picked up, and a helper reported "server stopped" while its preview kept listening (Example (studio site), 2026-11-07).
+**How to apply:** Put both lines in every parallel-helper brief. At check-in and check-out the main session runs `git status --short` and lists listening dev ports, and stops only PIDs it can attribute.
+
 ### Sharing tables: three checks
 **Rule:** Any table that grants access to another user's record (shares, memberships, invites) needs three database-side checks: (1) on insert, the record really belongs to the person granting access; (2) the recipient can change only their answer (status, note), never other columns such as the record id or owner; (3) end states (removed, declined) can't be undone by the recipient.
 **Why:** Example (WowTodo): row security only checked "the sharer is you", so a former recipient could re-share a task they no longer had, flip "removed" back to "accepted", or point their share at another task id.
@@ -178,6 +183,11 @@
 **Rule:** Where the project fixes a logo shape (Example (WowTodo): always a full circle, never a square with a letter), every new placement uses the one shared brand component or pre-cut asset.
 **Why:** Consistency builds trust between app and site.
 **How to apply:** Record the shape rule in project memory; OS launcher and store icon masks are set by Google/Apple, say so if asked.
+
+### Show technical documents as real pages
+**Rule:** When a site shows a technical document (spec sheet, assembly drawing, PDF), show real renders of its pages with every annotation, dimension and note, cropped only in white space. Never lift the drawings out of the page.
+**Why:** Drawings cut out of a spec PDF looked odd and hid the planning behind the product; the owner asked for the exact pages (2026-11-07).
+**How to apply:** Render the PDF pages at 3x, crop between sections, cover only supplier names, prices or contacts, and check that the text is legible at desktop width. Flag phone legibility to the owner.
 
 ### Admin-toggle settings pattern
 **Rule:** When the owner chooses between options and says the switch belongs "in the admin, later", build every option and select with ONE config value (a constant in a config file, with a comment naming the admin as future owner). Add a line to an admin-ideas doc. Do not build admin UI or settings tables early.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.12 — 2026-11-07
+- **studio-core 0.1.19 · playbook:** rules "Helper hygiene in a shared worktree" (explicit-path staging, commit regenerated files, prove the port is closed) and "Show technical documents as real pages".
+- **studio-site 0.1.5 · site-builder:** light-only work switches dark visitors automatically with a note; brand marks fit whole inside circles; theme-aware inline SVG logo (currentColor, cut-out lettering, no pill) and mark-only favicon with a dark variant.
+
 ## 0.2.11 — 2026-11-07
 - **studio-core 0.1.18 · playbook, working-contract:** rule "Moving DNS to Cloudflare: change nothing first"; helpers can hand back silently, so check git and notes before saying you're waiting.
 - **studio-site 0.1.4 · site-builder:** showcase screenshots of live sites in light and dark pairs, whole visuals, widgets in use, theme notice for dark-only work.
