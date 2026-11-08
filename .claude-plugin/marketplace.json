@@ -26,7 +26,7 @@
       "name": "studio-site",
       "source": "./plugins/studio-site",
       "description": "The product website: a story-led marketing site (Vite, React, Tailwind, GSAP), mockups reused as live demos, an updates page, waitlist, SEO basics and Vercel deploys.",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "displayName": "Studio Site · product website"
     },
     {
