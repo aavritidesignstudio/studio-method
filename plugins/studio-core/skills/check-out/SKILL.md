@@ -34,6 +34,7 @@ List them in the handoff under Open; mention the top one in the reply.
 Existing file only (`PROJECT_STATUS.md` / `CURRENT_STATE.md` / similar, often `docs/` or `docs/project/`). Rewrite stale lines,
 don't append a diary: Last updated + commit, what shipped/changed this session, open/broken, next actions.
 Fold useful lines from `docs/agent-notes/*` in, then delete those notes.
+Refresh `SERVICES.md` if a service, account, env var or plan changed this session.
 
 ## 5. Memory
 Save only what lasts beyond this repo's docs and isn't derivable from code/git: owner preferences and corrections

@@ -68,7 +68,11 @@ Doc: https://developers.cloudflare.com/email-routing/get-started/enable-email-ro
    (`contact`), Action = **Send to an email**, Destination = main inbox → **Save**.
 4. Catch-all (if chosen): Routing Rules → catch-all → Action **Send to an email** → main inbox → enable.
    (Not on the onboarding doc page; confirm the current label in the dashboard.)
+   The catch-all starts as **Drop** + **Disabled**: set Send to an email and enable it if chosen.
 5. noreply@: no rule needed if catch-all is off; if catch-all is on, add a `noreply` rule with action **Drop**.
+If Cloudflare refuses to activate ("Existing non-Cloudflare MX records conflict"), delete the old root MX records AND
+the old root SPF TXT in DNS → Records, then go Back/Activate again. A destination address already verified on the same
+Cloudflare account shows Verified at once, with no email.
 **Check:** MX lookup shows Cloudflare routes; send a mail from the test account to each address; it lands in the inbox.
 In Gmail, add a filter/label per address (Has the words: `to:contact@<domain>`) so mail is easy to tell apart.
 
@@ -99,8 +103,9 @@ Then skip Phase 5 (replying already works) — Resend (Phase 4) is unchanged; it
 Docs: https://resend.com/docs/dashboard/domains/cloudflare · https://resend.com/docs/send-with-smtp
 1. resend.com → **Domains** → **Add domain** → enter the root domain (lets you send from `noreply@<domain>`;
    Resend's own records go on the `send` subdomain and `resend._domainkey`, so they don't clash with root MX).
-   Pick the region closest to the users if asked.
-2. **Sign in to Cloudflare** (automatic, Domain Connect) — or add manually in Cloudflare → DNS → Records:
+   Pick the closest region offered (e.g. Tokyo for India). Leave click/open tracking off for transactional mail.
+2. Resend now adds CNAME records (`send` and a region one like `rsend`) plus the DKIM TXT, and offers **Auto configure**
+   with Cloudflare. Or add manually in Cloudflare → DNS → Records:
    MX `send` → value shown, priority 10; TXT `send` → `v=spf1 include:amazonses.com ~all`;
    TXT `resend._domainkey` → value shown, **DNS only**. Name field = subdomain part only.
 3. Don't enable Resend **Receiving** on the root domain (it would take over root mail).
@@ -110,6 +115,8 @@ Docs: https://resend.com/docs/dashboard/domains/cloudflare · https://resend.com
 6. API keys (Resend → **API Keys** → **Create API key**, permission **Sending access**, domain = this domain):
    - one for the app/server (e.g. `RESEND_API_KEY`),
    - one separate key for Gmail SMTP (path 1), so either can be revoked alone.
+   Always create a NEW key scoped to this domain only; never edit an existing key (other projects may use it, and the
+   value is shown only once anyway).
    The user stores them straight away (see Rules); never in chat, never committed.
 **Check:** Resend shows Verified; DNS lookups show the records.
 
@@ -132,6 +139,12 @@ Set the app's mail secrets where its server code runs (user runs the command; yo
 `RESEND_API_KEY`, `*_FROM` = `Brand <noreply@<domain>>`, reply-to = `contact@<domain>`, forward-to = `contact@<domain>`.
 Then (with the user's ok) deploy and send one real test through the app's own flow.
 **Check:** the mail arrives, From = noreply@, replying goes to contact@, Show original = PASS.
+Check env var NAMES without seeing values: `vercel env ls`.
+Website domain on Vercel: adding the root may make `www` primary and redirect the root to it. Flip it if the root should
+be primary (root → Production, `www` → Redirect 308 to root; any old subdomain → Redirect 308). With mail records on
+Cloudflare, use the A record Vercel lists as legacy (`76.76.21.21`, still supported) for the root, not a root CNAME;
+ignore the "DNS Change Recommended" badge. Before switching: old `mail`/`ftp` CNAMEs pointing at the root will follow
+it, and the old host's other A records keep working.
 Optional: score a test mail at https://www.mail-tester.com (aim ≥ 9/10).
 
 ## Phase 7 — Wrap up

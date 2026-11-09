@@ -6,7 +6,7 @@ description: Start a new project with Studio Method (App + Site Kit), or bring a
 # Studio start
 
 Goal: in one sitting, a project either **exists and runs** (new) or **works the Studio way** (existing), with the
-three project docs in place and the owner knowing the next step. Short questions, sensible defaults, nothing
+project docs in place and the owner knowing the next step. Short questions, sensible defaults, nothing
 destructive.
 
 ## 0. Check the toolbox (every time, 1 minute)
@@ -118,7 +118,9 @@ release flow, who deploys).
 
 ### 3d. Docs and rules (create only what's missing; never overwrite)
 - `docs/project/CURRENT_STATE.md` (status: summary, working, open/broken, next), `HANDOFF.md`,
-  `WORKING_CONTRACT.md` (from the working-contract skill, with a `## Project overrides` heading), `DECISIONS.md`.
+  `WORKING_CONTRACT.md` (from the working-contract skill, with a `## Project overrides` heading), `DECISIONS.md`,
+  `SERVICES.md` (template in the working-contract skill). For an existing repo, fill what can be found from env var
+  names, config files, git remotes and DNS/RDAP lookups; mark the rest ❓.
   Equivalents that already exist are adopted under their own names.
 - `docs/product/mockups/README.md` (mockup index), `docs/agent-notes/` (helper notes).
 - For apps: `docs/release/RELEASE_LOG.md` and `WHATS_NEW.md`.
@@ -126,7 +128,7 @@ release flow, who deploys).
   ```
   ## Studio Method
   This project follows Studio Method (App + Site Kit). Every session: load working-contract + playbook.
-  Docs: docs/project/{CURRENT_STATE,HANDOFF,WORKING_CONTRACT,DECISIONS}.md.
+  Docs: docs/project/{CURRENT_STATE,HANDOFF,WORKING_CONTRACT,DECISIONS,SERVICES}.md.
   Words: "catch up", "check out", "mockup", "teach", "optimize repo", "harvest" (see playbook glossary).
   Project overrides: <none yet>
   ```

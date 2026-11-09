@@ -21,13 +21,13 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
 - Update the status doc in every commit (see section 2).
 
 ## 1. Session start
-1. Look for the three docs (default `docs/`). Match existing equivalents first. A status file may be named
+1. Look for the docs (default `docs/`). Match existing equivalents first. A status file may be named
    `PROJECT_STATUS.md`, `CURRENT_STATE.md`, `STATUS.md` or similar, and may live in a subfolder such as `docs/project/`.
    **If one exists, read it and keep updating it. Never recreate or overwrite it.**
 2. Create only what's missing, using the templates below.
 3. If `HANDOFF.md` has content, read it first and continue from its next step.
 
-## 2. The three docs
+## 2. The docs
 - **Status** (`PROJECT_STATUS.md`): the long-lived record of what the project is, what works, what's open and what's next.
   **Update it in every commit you make.** Keep it current, not a diary. Rewrite stale lines rather than appending.
 - **Handoff** (`HANDOFF.md`): a snapshot for a fresh session: where we stopped, work in flight (including helper agents
@@ -35,6 +35,11 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
   Overwrite it each time.
 - **Contract** (`WORKING_CONTRACT.md`): a short copy of sections 3–6, so helper agents and other sessions can follow it
   without this skill. Add project-specific overrides there.
+- **Services** (`SERVICES.md`): every outside service the project uses (domain registrar, DNS, hosting, code host,
+  database, email send/receive, AI APIs and so on): what it does here, which account/login owns it, the plan, whether the
+  login is shared with other projects, secret NAMES only and where each is set, and the handover step.
+  **Never passwords, keys or codes** (those live in a password manager). Update it whenever a service, account,
+  env var or plan changes.
 
 ## 3. Roles
 - The main session (Opus) **plans, reviews, audits, monitors** and decides (section 0).
@@ -93,6 +98,23 @@ With no percentage reported, assume < 75%.
 **In flight:** (helpers, branches, uncommitted work)
 **Open questions:**
 **Next step:**
+```
+
+`SERVICES.md`
+```
+# Services and accounts
+Names only, never secrets. **Updated:** <date> · ❓ = owner to fill in
+## At a glance
+| Need | Service | Plan | Shared with other projects? |
+|---|---|---|---|
+## Each service
+### <Service>: <what it does here>
+- Login: ❓ · Plan: ❓
+- Set up there: <domain, records, env vars, keys by name>
+- Handover: <how it moves to the client>
+## Secrets: where each one lives (names only)
+| Name | Where it's set | Made in |
+|---|---|---|
 ```
 
 `WORKING_CONTRACT.md`: sections 3–6 above, condensed, plus a `## Project overrides` heading.

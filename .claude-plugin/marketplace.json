@@ -12,7 +12,7 @@
       "name": "studio-core",
       "source": "./plugins/studio-core",
       "description": "How we work: start or adopt a project, working contract, status and handoff docs, catch-up and check-out, helper agents, mockup-lab, teach, repo hygiene, and the playbook of hard rules and shared words. Harvest keeps the method growing.",
-      "version": "0.1.19",
+      "version": "0.1.20",
       "displayName": "Studio Core · way of working"
     },
     {
@@ -33,7 +33,7 @@
       "name": "studio-services",
       "source": "./plugins/studio-services",
       "description": "The services behind the app and site: Supabase (local and cloud, migrations, edge functions, auth), Cloudflare R2 and DNS, Vercel, Resend + Zoho email, Google sign-in, EAS, and an environment-variable wizard that keeps secrets out of chat.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "displayName": "Studio Services · Supabase, Cloudflare, Vercel, email"
     }
   ]
