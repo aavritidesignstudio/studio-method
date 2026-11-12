@@ -39,7 +39,10 @@ Hard rules and shared words live in the `playbook` skill (studio-core); load it 
   database, email send/receive, AI APIs and so on): what it does here, which account/login owns it, the plan, whether the
   login is shared with other projects, secret NAMES only and where each is set, and the handover step.
   **Never passwords, keys or codes** (those live in a password manager). Update it whenever a service, account,
-  env var or plan changes.
+  env var or plan changes. Better: keep `docs/project/services.json` as the source and generate `SERVICES.md` from it
+  (see `studio-start`).
+- **Deploy map** (`DEPLOY_MAP.md`): folder -> where it goes -> trigger -> how to verify, the production branch, and which CLI
+  logins own which hosts. Read it before any push or deploy; update it when a deploy path changes.
 
 ## 3. Roles
 - The main session (Opus) **plans, reviews, audits, monitors** and decides (section 0).

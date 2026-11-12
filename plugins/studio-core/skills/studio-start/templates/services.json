@@ -1,0 +1,34 @@
+{
+  "project": "<Project name>",
+  "updated": "YYYY-MM-DD",
+  "intro": "Secret **names** and where they live are listed here; secret **values** never go in this repo.",
+  "overview": "One short paragraph: what talks to what.",
+  "accounts": [
+    {
+      "name": "owner@example.com",
+      "login": "How you sign in (e.g. Google, email + password, SSO)",
+      "services": ["host"],
+      "notes": "",
+      "toConfirm": []
+    }
+  ],
+  "services": [
+    {
+      "id": "host",
+      "name": "Example host",
+      "powers": "What it does for this project",
+      "account": "owner@example.com",
+      "login": "",
+      "plan": "Free",
+      "secrets": ["EXAMPLE_API_KEY (set in: host dashboard)"],
+      "dashboard": "https://example.com/dashboard",
+      "notes": "Limits, expiries, renewal dates",
+      "checkBy": "",
+      "toConfirm": ["plan and renewal date"]
+    }
+  ],
+  "rules": [
+    "Update this file and regenerate SERVICES.md in the same commit as any service, account, secret-name or plan change.",
+    "Review at every release and every repo clean."
+  ]
+}

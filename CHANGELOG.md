@@ -1,5 +1,10 @@
 # Changelog
 
+
+## 0.2.13 — 2026-11-13
+- **studio-core 0.1.21 · playbook, studio-start, working-contract, optimize-repo:** new rules "Services record", "Deploy map" and "Pushed is not deployed"; studio-start now offers `services.json` + generator + `DEPLOY_MAP.md` templates (new and existing repos); working-contract lists both docs; optimize-repo reviews services.json.
+- **studio-app 0.1.5 · release-ritual:** Android-only OTAs use `--platform android`; review services.json at release.
+- **studio-services 0.2.2 · stack-guide:** Vercel ignored-build step made safe (exit codes, missing previous SHA builds, 256 chars, monorepo shared files, CLI login check); Supabase MCP migration versions, CLI 403, dashboard captcha "challenge-error".
 ## 0.2.12 — 2026-11-07
 - **studio-core 0.1.19 · playbook:** rules "Helper hygiene in a shared worktree" (explicit-path staging, commit regenerated files, prove the port is closed) and "Show technical documents as real pages".
 - **studio-site 0.1.5 · site-builder:** light-only work switches dark visitors automatically with a note; brand marks fit whole inside circles; theme-aware inline SVG logo (currentColor, cut-out lettering, no pill) and mark-only favicon with a dark variant.

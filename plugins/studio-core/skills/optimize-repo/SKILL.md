@@ -58,6 +58,8 @@ Never: delete anything tracked or not ignored, touch uncommitted work, delete gl
 
 ## 5. Report and record
 
+- If the repo has `docs/project/services.json`, review it now (plans, expiries, `checkBy` dates, `toConfirm`).
+
 - Before/after sizes, what was deleted, what was skipped and why, anything the user must do (stop a server,
   fix a broken clean script). Mention that the first dev start after clearing a cache is slower.
 - Record the run so the 15-day reminder resets:

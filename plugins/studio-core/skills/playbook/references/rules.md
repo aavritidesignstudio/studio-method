@@ -32,6 +32,21 @@
 **Why:** A public repo that deployed fine stopped deploying the moment it was made private; the studio's commit identity was not the Vercel owner's GitHub account.
 **How to apply:** Before making a Vercel-connected repo private, set that repo's local author to the owner's GitHub identity (`git config --local user.email <id>+<login>@users.noreply.github.com`, from `gh api user --jq .id`) and confirm with the owner. Read the reason from the commit status (`gh api repos/<o>/<r>/commits/<sha>/statuses`), not by retrying.
 
+### Services record: one file lists every outside service
+**Rule:** Every project keeps `docs/project/services.json` as the single source of every external service: what it powers, the owning account and login method, plan or tier, secret NAMES and where each is stored (never values), dashboard URL, notes, limits and expiries, `checkBy` date, and `toConfirm` for anything unknown. A generated `docs/project/SERVICES.md` is the readable copy. Update both in the same commit as any change to a service, account, secret name or plan. Review at every release and every repo clean.
+**Why:** Without one list, nobody knows which account owns which service, what is on a free tier, or which key expires, until something breaks.
+**How to apply:** Edit the JSON, run the generator (`node scripts/services-md.mjs`), commit both. `--check` fails if the MD is stale, so CI or a build step can enforce it. Optional: an admin page that reads the JSON at build time and fails the build when the MD is stale. `studio-start` creates the files.
+
+### Deploy map: read it before any push or deploy
+**Rule:** Every multi-part repo keeps `docs/project/DEPLOY_MAP.md`: for each folder, where it goes, the trigger (auto on push or a manual command) and how to verify; which branch is production; which CLI logins on this machine own which hosts. Read it before any push or deploy.
+**Why:** In a repo with a site, an app and a backend, "I pushed" means different things per folder, and a wrong CLI login can deploy to (or fail on) the wrong account.
+**How to apply:** `studio-start` creates it from the host configs it finds (`vercel.json`, root directories, `eas.json`, backend config, CI), for new and existing repos. Update it in the same commit as any change to how something deploys.
+
+### Pushed is not deployed
+**Rule:** After pushing a production branch, confirm each auto-deploying host shows the new deployment as Ready (for example `vercel ls <project>`) before telling the owner it is live. Then check a page once with a cache-busting query (`?v=<commit>`). No polling loops.
+**Why:** Example (a Vercel site): the site stayed a week old because every deploy was cancelled by a faulty skip rule, and nobody looked at the deployment list.
+**How to apply:** "Canceled" or "Error" on the newest Production row means it is not live: read why before saying anything else.
+
 ### Do not poll the live site
 **Rule:** After a push, do not curl the production site in a loop waiting for the new build.
 **Why:** It looks like deploy activity to the permission classifier and gets denied; it is also noisy.

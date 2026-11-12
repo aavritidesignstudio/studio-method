@@ -68,7 +68,10 @@ Write the answers to `docs/project/DECISIONS.md` (dated) before scaffolding, and
 - **Environment**: run `env-setup` (studio-services). It writes `.env.example`, explains where each value comes
   from, and the user pastes secrets into `.env` themselves.
 
-### 2c. Docs and rules (same as section 3d; `PROJECT_MAP.md` starts with the scaffold's layout)
+### 2c. Services record and deploy map
+Ask once (default yes): "Keep a services record and a deploy map?" If yes, copy `templates/services.json` to `docs/project/services.json` and fill it from the chosen services (names only, mark unknowns `toConfirm`); copy `scripts/services-md.mjs` to the repo's `scripts/` and run it to write `SERVICES.md`; copy `templates/DEPLOY_MAP.md` to `docs/project/DEPLOY_MAP.md` and fill the rows.
+
+### 2d. Docs and rules (same as section 3d; `PROJECT_MAP.md` starts with the scaffold's layout)
 Then: first commit on `dev` ("Studio start: scaffold"), offer to create the remote (see `github-to-gitlab` for the
 GitLab flow), and suggest the first `mockup-lab` session for the main screen before any feature code.
 
@@ -116,11 +119,17 @@ release flow, who deploys).
   the promise, the market, current bets. The product-lead agent reads it before every pulse.
 - **Decisions**: record in `DECISIONS.md` only what's confirmed (by the owner, or plainly by commits/docs).
 
-### 3d. Docs and rules (create only what's missing; never overwrite)
+### 3d. Services record and deploy map (ask first, default yes)
+Ask: "Keep a services record and a deploy map?" If yes, **inspect the codebase** before asking anything: manifests, `.env.example` and env reads in functions (names only), config files, CI and host configs (`vercel.json`, `eas.json`, backend config), docs and `git remote -v`.
+1. Draft `docs/project/services.json` from `templates/services.json`; copy `scripts/services-md.mjs` to `scripts/`, run it, and commit both.
+2. Ask the owner only what the code cannot say (which account owns each service, plan, renewal dates). Put every unknown in `toConfirm`; never guess.
+3. Draft `docs/project/DEPLOY_MAP.md` from `templates/DEPLOY_MAP.md`: folder, host, trigger, verify command, production branch, and which CLI login owns which host (check `whoami` with the binary you deploy with).
+
+### 3e. Docs and rules (create only what's missing; never overwrite)
 - `docs/project/CURRENT_STATE.md` (status: summary, working, open/broken, next), `HANDOFF.md`,
   `WORKING_CONTRACT.md` (from the working-contract skill, with a `## Project overrides` heading), `DECISIONS.md`,
-  `SERVICES.md` (template in the working-contract skill). For an existing repo, fill what can be found from env var
-  names, config files, git remotes and DNS/RDAP lookups; mark the rest ❓.
+  `SERVICES.md` and `DEPLOY_MAP.md` (from 2c / 3d; `SERVICES.md` is generated from `services.json`; the plain template
+  in the working-contract skill is for owners who decline the JSON).
   Equivalents that already exist are adopted under their own names.
 - `docs/product/mockups/README.md` (mockup index), `docs/agent-notes/` (helper notes).
 - For apps: `docs/release/RELEASE_LOG.md` and `WHATS_NEW.md`.
@@ -128,14 +137,14 @@ release flow, who deploys).
   ```
   ## Studio Method
   This project follows Studio Method (App + Site Kit). Every session: load working-contract + playbook.
-  Docs: docs/project/{CURRENT_STATE,HANDOFF,WORKING_CONTRACT,DECISIONS,SERVICES}.md.
+  Docs: docs/project/{CURRENT_STATE,HANDOFF,WORKING_CONTRACT,DECISIONS,SERVICES,DEPLOY_MAP}.md.
   Words: "catch up", "check out", "mockup", "teach", "optimize repo", "harvest" (see playbook glossary).
   Project overrides: <none yet>
   ```
 - Project memory: save only facts the repo doesn't record (who the owner is, release cadence, accounts by role
   — never secrets). The general rules stay in the playbook; don't copy them into memory.
 
-### 3e. Hand over
+### 3f. Hand over
 Commit on `dev` or a branch from it, never directly on `main` (no `dev` yet? ask: create `dev` (Recommended) or
 use a feature branch). Message: "Studio start: project map, status and method docs". Then give a `catch-up`-style
 snapshot and ask what to work on.

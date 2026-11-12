@@ -17,6 +17,8 @@ Seed a few local-only accounts (e.g. `meera.demo@example.com`, `riya.demo@exampl
 - Header comment: purpose + `Created:` real date.
 - Replay locally: `supabase db reset` (script it, e.g. `npm run db:reset:local`). Regenerate DB types after every migration (`gen:types`) so the client is typed.
 - Compare local with cloud: a `db:diff:cloud` script, or `supabase migration list --linked`.
+- A migration applied through the Supabase MCP `apply_migration` gets a NEW timestamp version in the cloud. Rename the local file to that version (`list_migrations` shows it) so a later `db push` does not run it again.
+- If the CLI returns 403, it is logged into a different account: `supabase projects list` shows which projects it can see.
 - Push: `supabase db push --yes --workdir <app folder>` as a bare command. Review the migration list first. Standing approval from the owner may cover it; otherwise ask.
 - One-off SQL on the cloud project: newer CLI versions have `supabase db query --linked "<sql>"` (pin the version, e.g. `npx -y supabase@<version> db query --linked ...`). Do not use an MCP that may point elsewhere.
 
@@ -50,3 +52,6 @@ Scheduled functions use `pg_cron` + `pg_net` + Vault:
 
 ## Auth URL configuration
 Cloud dashboard: Authentication -> URL Configuration -> add the app's deep link (`<scheme>://**`) to Redirect URLs; without it, Google sign-in in the store build fails. Site URL = the production website.
+
+## Dashboard sign-in problems
+A "challenge-error" in the console on sign-in or password reset means the captcha was blocked by browser extensions or privacy settings. Use another browser or a phone. For the CLI: create an access token on the phone, then run `supabase login --token` in your own terminal. Never paste tokens into chat.
