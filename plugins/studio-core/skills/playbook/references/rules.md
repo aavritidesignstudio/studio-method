@@ -229,6 +229,11 @@
 **Why:** Repeating a settled decision wastes their time.
 **How to apply:** Record the decision in memory with its reason.
 
+### Translations read naturally, never word for word
+**Rule:** Write every translated UI string from its meaning, the way a native speaker would say it, not as a word-for-word copy of the English.
+**Why:** Example (WowTodo): "Your note, cleaned up" became "आपका नोट, साफ़ किया हुआ", which reads machine-made; the owner caught it on the phone.
+**How to apply:** For each language object, rephrase from intent ("Wow ने आपका नोट ठीक से लिख दिया"), keep the loanwords people really use (note, step, save, type), and prefer everyday verbs over formal ones. Put this rule in every helper brief that writes copy, and read the strings on a real screen before sign-off.
+
 ## Release and communication
 
 ### Real dates only
