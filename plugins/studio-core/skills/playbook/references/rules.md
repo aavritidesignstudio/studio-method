@@ -45,7 +45,7 @@
 ### Pushed is not deployed
 **Rule:** After pushing a production branch, confirm each auto-deploying host shows the new deployment as Ready (for example `vercel ls <project>`) before telling the owner it is live. Then check a page once with a cache-busting query (`?v=<commit>`). No polling loops.
 **Why:** Example (a Vercel site): the site stayed a week old because every deploy was cancelled by a faulty skip rule, and nobody looked at the deployment list.
-**How to apply:** "Canceled" or "Error" on the newest Production row means it is not live: read why before saying anything else.
+**How to apply:** "Canceled" or "Error" on the newest Production row means it is not live: read why before saying anything else. Check the row is the deployment you just pushed (its age matches the push); right after a push the newest row can still be the previous Ready one while the new build is Queued.
 
 ### Do not poll the live site
 **Rule:** After a push, do not curl the production site in a loop waiting for the new build.

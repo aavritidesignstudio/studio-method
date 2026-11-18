@@ -25,6 +25,8 @@ Hard rules (from the playbook): demo accounts only; the focused app must be conf
 ## 3. Point the app at the LOCAL backend
 1. `supabase start` (retry once on a container name conflict). 2. Back up `.env` outside git. 3. Swap to the local block (URL `http://127.0.0.1:<api-port>`, local anon key), see `env-setup`. 4. Start the bundler with the vars (`EXPO_PUBLIC_*` are inlined at bundle time: restart after any change). 5. `adb reverse tcp:8081 tcp:8081` and `adb reverse tcp:<api-port> tcp:<api-port>`. 6. At the end restore `.env` byte-exact: `cmp .env <backup>` must pass.
 **Black screen** = the dev client never got the bundle. After any APK (re)install the reverse mappings are lost: redo `adb reverse`, then `am force-stop <pkg>` + `am start`, and wait for `ReactNativeJS` logs. A reinstall also drops runtime permissions: `adb shell pm grant <pkg> android.permission.RECORD_AUDIO` (and others needed).
+
+**Launch order (no frozen dev client):** start the bundler and `adb reverse` first, warm the bundle by requesting it once (e.g. `curl "http://localhost:8081/index.bundle?platform=android&dev=true" -o /dev/null`, wait for 200; a cold first bundle can take minutes), and only then `am start` the dev client. Launched earlier, it sits blank and Android shows "isn't responding". If a helper cannot force-stop (permission rules), the owner closes the app by hand (OK on the dialog, or swipe it from recents); never route the blocked command through another agent. Example (WowTodo): two phone QA runs were lost to a cold bundle and a stuck process on a low-memory phone.
 Local gradle builds need `JAVA_HOME` (Android Studio JBR) and `ANDROID_HOME`.
 
 ## 4. Sign in with a demo account

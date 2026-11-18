@@ -33,7 +33,8 @@ If unsure, run section 2's introspection: if the merged manifest or native confi
 3. From the app folder, bare command: `npx -y eas-cli update --channel production --platform android --message "<short>" --non-interactive`. If the permission system blocks it as a production deploy, give the owner the exact command; read the update group id afterwards (`eas update:list`).
 4. Android-only apps always pass `--platform android`. The default all-platform export can fail on the web bundle (for example expo-sqlite's wasm).
 5. Review `docs/project/services.json` (plans, expiries, `checkBy`) as part of the release.
-6. Confirm the runtime version matches the store version you target; users get it after opening the app twice.
+6. Run the update in the background; it can take minutes. On "Asset processing timed out" or another upload failure, list the branch's updates (`npx eas-cli update:list --branch production --limit 3`) before retrying, so a retry never publishes twice; the hosted side is often just slow, so retry once after a short wait.
+7. Confirm the runtime version matches the store version you target; users get it after opening the app twice.
 
 ## 4. Log it (same batch as the release)
 1. **Internal** `docs/release/RELEASE_LOG.md`: | date | kind (Play build/OTA) | version/runtime | build or update id | commit | technical what changed |.

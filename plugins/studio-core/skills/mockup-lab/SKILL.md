@@ -128,7 +128,9 @@ Save a copy to `docs/product/mockups/<slug>.html` in the repo, and add a row to 
   the same questions. Don't guess.
 - On feedback, edit the same file and republish to the **same path**, which keeps the URL. Move each settled
   question from "Decide before we build" into an **Agreed** list in the proposal column. Set the defaults to the
-  chosen options, and remove the toggles for decided items.
+  chosen options, and remove the toggles for decided items. Remove their script hookups too (event bindings,
+  lookups by id), then reload once and confirm zero console errors before republishing: a binding left on a
+  removed control throws and the phone renders blank.
 - Small rounds: change what they asked, nothing else. No second "check" pass unless something is visibly broken.
 
 ## 5. Hand off to the build
