@@ -46,7 +46,8 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | Skill | Pack | What it does |
 |---|---|---|
 | ✅ site-builder | site | Story-led home, live demos from mockups, updates page, waitlist, Vercel deploy |
-| seo | site | Titles and descriptions, Open Graph images, sitemap, robots, structured data (SoftwareApplication, FAQ), Search Console, Core Web Vitals, internal links, per-language pages |
+| seo | site | Titles and descriptions, Open Graph images, sitemap, robots, structured data (SoftwareApplication, FAQ), Search Console + Bing Webmaster (Bing feeds ChatGPT and Copilot search), Core Web Vitals, internal links, per-language pages, `llms.txt` for AI answers, JSON-LD Organization with `sameAs` (LinkedIn, Instagram) so search engines stop mixing the brand up with look-alike names, old CMS links removed with Search Console Removals |
+| presence-kit | site | The studio's profiles outside the site: LinkedIn company page and Google Business Profile with paste-ready copy that reuses the site's own lines, plus brand images rendered from site assets (square logo 800 px, LinkedIn cover 1128x191 at 2x, JPG work samples). From Aavriti, 2026-11 |
 | go-live | site | Domain on Cloudflare DNS → Vercel, SSL, www/apex redirects, email records (SPF/DKIM/DMARC), a pre-launch checklist and a rollback plan |
 | legal-pages | site | Privacy policy, terms and delete-account page written from a code audit of what the app really collects |
 | analytics | site/app | Privacy-friendly analytics, launch funnels, consent where required |

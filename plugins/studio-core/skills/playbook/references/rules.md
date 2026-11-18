@@ -321,6 +321,11 @@
 **Why:** Example (WowTodo): each QA brief repeated the full keyboard list, so the same passed sheets were tested again and again while the owner waited.
 **How to apply:** Keep one small table in the repo: item, result, date, evidence. Put it in every QA brief and tell helpers not to retest passed rows. When a shared component changes, test a small sample and go wider only if a sample fails. Sample the final release build too, since it is a different build type.
 
+### Google Business Profile: ask how clients are met
+**Rule:** Before setting up a Google Business Profile, ask how the business meets its clients. Online-only businesses are not eligible; a studio that meets clients in a city is a service-area business with the address hidden.
+**Why:** Example (Aavriti): Google showed a different firm with a similar name in the side panel for the studio's own name, and a profile was the fix. Signing up as the wrong type risks suspension.
+**How to apply:** Ask: office clients can visit, service area (address hidden), or online only. For a service area, pick one primary city and name the others in the description. Verification still needs a real address and often a short video. Use the same name, one-line description and site URL as the website and LinkedIn.
+
 ### Moving DNS to Cloudflare: change nothing first
 **Rule:** Move the nameservers first with every record copied exactly and set to DNS only (grey cloud). Point anything at a new host only after the move is active.
 **Why:** Example (Aavriti): Cloudflare's import scan missed a live subdomain, and turned on the proxy for cPanel, mail and FTP records by default. The MX record pointed at the apex, so moving the apex to a new web host would have broken mail.
