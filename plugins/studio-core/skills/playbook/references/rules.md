@@ -330,3 +330,9 @@
 **Rule:** Move the nameservers first with every record copied exactly and set to DNS only (grey cloud). Point anything at a new host only after the move is active.
 **Why:** Example (Aavriti): Cloudflare's import scan missed a live subdomain, and turned on the proxy for cPanel, mail and FTP records by default. The MX record pointed at the apex, so moving the apex to a new web host would have broken mail.
 **How to apply:** Before the switch, list the public records (`nslookup`/`Resolve-DnsName` for the apex, `www`, mail and known subdomains), compare them with the old panel's zone list and add what the scan missed. Check the registrar for DNSSEC (it must be off before the switch). After the switch, query the new nameserver directly to confirm identical answers. If MX points at the apex, give mail its own A record and point MX there before the apex moves. Expect public resolvers to cache the old nameservers for up to a day; a new subdomain can be added at both providers meanwhile.
+
+
+### Helpers keep the owner's copy
+**Rule:** A helper never rewrites text the owner wrote or approved (page titles, SEO fields, captions, headlines) unless the brief names that text as in scope. A new default goes only where no owner text exists.
+**Why:** Example (Aavriti): a helper briefed to make page titles clearer replaced the owner's descriptive per-project titles with a generic pattern and left the owner's fields unused.
+**How to apply:** In the brief, say which owner fields to keep (fallback pattern: owner value ?? new default). When reviewing, compare the built output against the owner's values and look for fields that became unused.
