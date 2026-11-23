@@ -102,6 +102,11 @@
 **Why:** Keeps the main session cheap, reviewable and conflict-free.
 **How to apply:** Check in on helpers about every 5 minutes; review diffs before merging.
 
+### Brief helpers with the owner's exact words
+**Rule:** When a helper builds what the owner asked, quote the owner's words in the brief and keep the rule exactly as wide as they said it. A helper must not widen a stated rule into a broader one on its own.
+**Why:** Example (WowTodo): the owner said repeating tasks should not show in Overdue *after the scheduled day*; a helper made them never overdue, so steps whose time had passed today stayed under Today. It took two extra fixes and two releases.
+**How to apply:** Put the request in quotes in the brief. When the helper reports a "UX call" that changes an existing behaviour, check it against the quote before shipping.
+
 ### Helper hygiene in a shared worktree
 **Rule:** Parallel helpers in one worktree stage files by explicit path (never `git add -A` or `.`), and a helper that runs a generator commits every file it regenerated. Before reporting, a helper proves its server port is closed (`netstat`), not just that it sent a stop.
 **Why:** A generator rewrote files that no commit picked up, and a helper reported "server stopped" while its preview kept listening (Example (studio site), 2026-11-07).
@@ -223,6 +228,11 @@
 **Rule:** When the owner says "remember the gaps, we shall deal with them later", write them to a list in the status doc and raise them when planning or when a related area is touched.
 **Why:** Silent drops erode trust.
 **How to apply:** One bullet per gap with the date it was deferred.
+
+### Recurring items move on with time, not with completion
+**Rule:** A repeating task advances to its next day when the day passes, whether or not it was finished. Each past day is saved in its history as done, partly done, missed or skipped. Overdue is time-bound within the day: a step whose time has passed today is overdue and its chip shows the time; earlier days show the date and never pile up in Overdue.
+**Why:** Example (WowTodo): a repeat moved on only when every step was ticked or the day skipped, so one partly done day froze a daily routine in Overdue and later days and their reminders never came.
+**How to apply:** Roll over on read or on a schedule (server-side, idempotent), re-arm reminders for the new day, offer an end (forever / N days / until a date), and test a partly done day, several missed days and a midnight crossing.
 
 ### Voice and accuracy trade-offs belong to the owner
 **Rule:** When the owner picks accuracy over speed (e.g. keep the high-accuracy transcription step), do not propose dropping it again; speed up elsewhere (perceived wait, server first-decision, upload size).
