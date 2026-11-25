@@ -79,3 +79,4 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | ✅ forge | core | Build or improve a skill in the method repo |
 | web-method | core | Variant of studio-start for web-only products (Next.js or Vite, no app) |
 | hooks | core | STARTED (0.1.14: session-start working-contract reminder). Optional hooks: session-start "due" reminders (repo clean, release notes), commit-message checks |
+| studio bundle | core | A `studio` plugin with only `dependencies` on the four packs, so one install brings them all (pattern proven in Scholar Method 0.1.1) |

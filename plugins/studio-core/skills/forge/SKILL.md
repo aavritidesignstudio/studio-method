@@ -30,6 +30,9 @@ Folder `plugins/<pack>/skills/<name>/`:
   skill folder or with `${CLAUDE_PLUGIN_ROOT}`.
 - Everything the plugin needs at run time (templates, schemas, scripts, examples) lives **inside the plugin folder**:
   an install copies only that folder, so files elsewhere in the repo are missing for users. Keep one copy.
+- Several packs: keep a bundle plugin (a `plugin.json` with only `name`, `version`, `description` and
+  `dependencies` listing every pack) so one `/plugin install` brings them all; a pack that needs core declares
+  `"dependencies": ["studio-core"]`. Same-marketplace dependencies install automatically.
 - Project-neutral: fictional examples, placeholders for ids, "Example (<project>)" labels where a real case helps.
 
 ## 4. Check

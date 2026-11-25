@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.2.16 · 2026-11-25
+- **studio-core 0.1.27 · playbook, forge:** rule "A banned style gets a repo test"; forge notes the bundle-plugin pattern (a `dependencies`-only plugin installs every pack in one go). Idea added: a `studio` bundle plugin.
+
 ## 0.2.13 — 2026-11-13
 - **studio-core 0.1.21 · playbook, studio-start, working-contract, optimize-repo:** new rules "Services record", "Deploy map" and "Pushed is not deployed"; studio-start now offers `services.json` + generator + `DEPLOY_MAP.md` templates (new and existing repos); working-contract lists both docs; optimize-repo reviews services.json.
 - **studio-app 0.1.5 · release-ritual:** Android-only OTAs use `--platform android`; review services.json at release.

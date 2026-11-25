@@ -346,3 +346,8 @@
 **Rule:** A helper never rewrites text the owner wrote or approved (page titles, SEO fields, captions, headlines) unless the brief names that text as in scope. A new default goes only where no owner text exists.
 **Why:** Example (Aavriti): a helper briefed to make page titles clearer replaced the owner's descriptive per-project titles with a generic pattern and left the owner's fields unused.
 **How to apply:** In the brief, say which owner fields to keep (fallback pattern: owner value ?? new default). When reviewing, compare the built output against the owner's values and look for fields that became unused.
+
+### A banned style gets a repo test
+**Rule:** When the owner bans a character or style in docs (em dashes, a spelling, a phrase), add a repo test that scans the docs and skills for it, with a short skip list for deliberate samples.
+**Why:** Example (Scholar Method): helpers writing many files kept slipping em dashes back in; a scan test caught each one at commit time instead of in review.
+**How to apply:** Add the check next to the other repo tests (for example `node --test`), scan Markdown in docs and skills, and skip fixtures or "before" examples that show the banned style on purpose.
