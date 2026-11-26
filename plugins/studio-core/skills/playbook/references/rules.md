@@ -356,3 +356,18 @@
 **Rule:** When the owner bans a character or style in docs (em dashes, a spelling, a phrase), add a repo test that scans the docs and skills for it, with a short skip list for deliberate samples.
 **Why:** Example (Scholar Method): helpers writing many files kept slipping em dashes back in; a scan test caught each one at commit time instead of in review.
 **How to apply:** Add the check next to the other repo tests (for example `node --test`), scan Markdown in docs and skills, and skip fixtures or "before" examples that show the banned style on purpose.
+
+### Every 'use server' export is a public endpoint
+**Rule:** In Next.js, every exported function of a `'use server'` file is a callable POST endpoint, even one only server code imports; its id is merely hidden until a client module imports it. Each such export checks its caller itself. Worker, cron and admin-only code lives in a plain `import 'server-only'` module, and no export trusts a caller-supplied identity (a `userId` / `serverAuth` parameter).
+**Why:** Example (Kissago): a save action took an optional `serverAuth: { userId }` meant for background workers; any browser could pass another user's id and bill or overwrite their story. Paid AI calls and bulk backfills sat in `'use server'` files with no check at all.
+**How to apply:** When adding a server action, start it with the session or admin check. Put worker paths in `lib/server/*` (server-only) and import them from routes. If a worker must reuse a browser-facing action, mark server-made arguments in an in-memory registry (a `WeakSet` on `globalThis`) that network input can never be in. Audit by listing exports of `'use server'` files with no auth call.
+
+### Browser tests the owner asked for: run them, cheaply
+**Rule:** Once the owner asks for real-browser tests (see "Don't drive the owner's browser unasked"), act without asking per step: group actions in one batch call, never type passwords (the owner signs in, with a test account), and read the code behind any button that spends money (AI calls, coins) before pressing it. Never press bulk or batch generation buttons in a test; count and report every paid call.
+**Why:** Example (Kissago): the owner could not keep approving each screenshot, and asked for single image calls only after a "Create all visuals" button turned out to queue one image per beat.
+**How to apply:** Load the browser tools in one search, batch click/type/wait/screenshot steps, and tell the owner the prompt option that allows the local host for the project. Before the test, state the call budget; after it, report calls and credits spent.
+
+### Stale dev cache after moving exports
+**Rule:** After moving exports between modules, a running Next.js (Turbopack) dev server can log `Export X doesn't exist in target module` once at startup. Check the imports, then stop the server, delete its dev dist folder and restart before treating it as a bug.
+**Why:** Example (Kissago): a refactor moved loaders to a server-only module; type-check and build passed, but the dev log showed the error until the cache folder was cleared.
+**How to apply:** Count errors in the server log after a clean restart and a page load that calls the moved code; zero means it was the cache.

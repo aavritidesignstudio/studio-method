@@ -34,6 +34,7 @@ Build the next one with `forge`; lessons from real projects arrive through `harv
 | a11y-pass | app/site | Labels, contrast in both themes, font scaling, screen-reader walk-through, reduced motion |
 | test-plan | core | Smallest useful tests per feature (logic checks, one end-to-end path), what to run before a release |
 | web-qa | site | Phone-width QA of a signed-in web app or admin panel without a device: headless browser, mocked API (route the backend URL to sample data), fake session in storage, screenshots light + dark, keyboard simulated by shrinking the viewport with the input focused. From WowTodo 2026-10 |
+| app-drive | core | Map a product's live UI into a project skill (accessible labels per screen, flows, option lists with their source files, costs per action, database queries that verify the result) so an agent can drive the app in the browser for tests and automation. From Kissago 2026-11 |
 
 ## 4. Money
 | Skill | Pack | What it does |

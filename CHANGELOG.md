@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.2.18 · 2026-11-26
+- **studio-core 0.1.29 · playbook:** rules "Every 'use server' export is a public endpoint", "Browser tests the owner asked for: run them, cheaply" and "Stale dev cache after moving exports". Idea added: an `app-drive` skill.
+
 ## 0.2.17 · 2026-11-26
 - **studio-core 0.1.28 · playbook, studio-start:** rule "Windows PowerShell 5.1 garbles UTF-8"; studio-start checks old docs' deploy/migration claims against the live source, may archive a 1,000+-line ledger behind a new short status, may move docs to the standard names, and link-checks after any move.
 
