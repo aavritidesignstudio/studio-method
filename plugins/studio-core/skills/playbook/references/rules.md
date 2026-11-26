@@ -77,6 +77,11 @@
 **Why:** A 25-line change turned into a 1,700-line diff after `sed -i` and helper edits flipped whole files, hiding the real change.
 **How to apply:** Prefer scripted edits that preserve newlines (Python `newline=''`) over `sed -i`. Say it in helper briefs.
 
+### Windows PowerShell 5.1 garbles UTF-8
+**Rule:** Never round-trip a text file through Windows PowerShell 5.1 (`Get-Content -Raw` … `Set-Content`). Edit with the editor tools, or Git Bash `sed`.
+**Why:** 5.1 reads UTF-8 without a BOM as the ANSI code page, so `—`, `×` and `→` came back as mojibake in a one-word replace.
+**How to apply:** If a shell edit is unavoidable, use Git Bash; afterwards grep the file for `â` to catch damage.
+
 ### Secrets stay out of chat and the repo
 **Rule:** Env var names yes, values never. The user pastes secrets into `.env` themselves. Never echo a secret in chat, commit a filled `.env`, or put one in a docs file. Anything prefixed `EXPO_PUBLIC_` (or `VITE_`) is inlined into a public bundle: only public-by-design values go there.
 **Why:** Leaked keys cost money and require rotation; one temp folder holding a DB password was one `git add` from a public repo.

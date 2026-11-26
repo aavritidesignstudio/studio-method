@@ -97,6 +97,9 @@ itself. Cover:
    dependencies, committed secrets (report, don't print), dead code, obvious bugs.
 8. **How work has gone so far**: existing docs (they are **kept**), branch flow, commit style, recent focus
    (`git log --oneline -50`), open branches and uncommitted work.
+   Old docs go stale: check every "applied / deployed / pending on prod" claim against the live source
+   (migration ledger, deploy list) before repeating it. Example: a status doc said prod still owed five
+   migrations that had been applied weeks earlier.
 
 ### 3b. Say back what you understood
 One message in plain words, ≤25 lines: what the product is, how it's built, the feature list with states, what
@@ -108,7 +111,9 @@ release flow, who deploys).
 - **Status**: `docs/project/CURRENT_STATE.md` with Summary · Working · Open/broken · Next, from the confirmed
   understanding. If a status doc already exists, **merge into it**: add what's missing and correct lines that are
   wrong, but never rewrite it from scratch or drop existing detail (release IDs, gotchas, deferred gaps, dates).
-  Show the owner the diff before committing.
+  An append-only ledger of 1,000+ lines is the exception, with the owner's yes: `git mv` it verbatim to
+  `docs/project/archive/`, then write a new ≤150-line status that carries every open, deferred and known-gap item
+  as a short bullet linking into the archive. Show the owner the diff before committing.
 - **Map**: `docs/project/PROJECT_MAP.md`, the codebase map helpers read first: folders, entry points,
   routes/screens, data model, functions, services and env var names, build/run/release commands.
 - **Claude's memory** (this project's auto-memory folder): one memory per fact the code doesn't hold: the owner's
@@ -130,7 +135,9 @@ Ask: "Keep a services record and a deploy map?" If yes, **inspect the codebase**
   `WORKING_CONTRACT.md` (from the working-contract skill, with a `## Project overrides` heading), `DECISIONS.md`,
   `SERVICES.md` and `DEPLOY_MAP.md` (from 2c / 3d; `SERVICES.md` is generated from `services.json`; the plain template
   in the working-contract skill is for owners who decline the JSON).
-  Equivalents that already exist are adopted under their own names.
+  Equivalents that already exist are adopted under their own names, or moved to the standard names if the
+  owner wants uniformity (`git mv`, then update every reference in docs, code comments and memory). After any
+  move, check that every relative link in the moved files still resolves: a deeper folder breaks `../` links.
 - `docs/product/mockups/README.md` (mockup index), `docs/agent-notes/` (helper notes).
 - For apps: `docs/release/RELEASE_LOG.md` and `WHATS_NEW.md`.
 - `CLAUDE.md`: add a short **Studio Method** section (keep everything already there):

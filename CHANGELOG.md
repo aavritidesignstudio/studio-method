@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.2.17 · 2026-11-26
+- **studio-core 0.1.28 · playbook, studio-start:** rule "Windows PowerShell 5.1 garbles UTF-8"; studio-start checks old docs' deploy/migration claims against the live source, may archive a 1,000+-line ledger behind a new short status, may move docs to the standard names, and link-checks after any move.
+
 ## 0.2.16 · 2026-11-25
 - **studio-core 0.1.27 · playbook, forge:** rule "A banned style gets a repo test"; forge notes the bundle-plugin pattern (a `dependencies`-only plugin installs every pack in one go). Idea added: a `studio` bundle plugin.
 
