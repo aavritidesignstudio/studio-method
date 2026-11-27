@@ -23,7 +23,7 @@ merged branches and agreed mockups behind them, and `docs/release/WHATS_NEW.md`.
 - **website only** → no version field; it's live after deploy.
 
 ## 2. Write the entry (same words in two places)
-- The site's updates data (shape in `references/updates-data.md`) and `docs/release/WHATS_NEW.md`.
+- The site's updates data (shape in `references/updates-data.md`; page template in site-builder `references/updates-page/`) and `docs/release/WHATS_NEW.md`, which mirrors every entry.
 - **Real date only**: run `date` first. Several releases on one day share that date. Never a future date.
 - 2–4 word title; 3–6 items, each a short benefit (`lead`) plus one everyday sentence (`text`).
 - Plain words, benefit first, fictional names in examples, none of the project's banned words (check the
@@ -47,7 +47,11 @@ new section, per the playbook).
 ## 4. Check
 `npm run build` (and the type check) passes; preview locally at phone and desktop widths, light and dark, each
 language. The updates page shows the new entry on top, the home strip picks it up, the version notice reads
-correctly. No console errors.
+correctly. No console errors. After the deploy, verify by content: fetch the final URL (`curl -L`, the apex may
+redirect to www) and grep for the new entry's title; a status code proves nothing.
+
+## Backfill (first time only)
+A product with no history uses the method in site-builder `references/updates-page/backfill.md`.
 
 ## 5. Ship
 Commit on `dev` ("site: updates entry <title> + <what else>"). The site goes live with the next **approved** push to

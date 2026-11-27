@@ -14,7 +14,8 @@ export type Update = {
 }
 ```
 
-Exactly one of `version` / `needs` per entry.
+Apps only: exactly one of `version` / `needs` per entry. Web-only products omit both.
+The page itself is the reference in site-builder `references/updates-page/` (1:1 port, tokens only).
 
 ## Writing an entry
 - 3 to 6 items. `lead` = short benefit in plain words ("Know what's due."); `text` = one friendly sentence with an everyday example.
@@ -25,9 +26,7 @@ Good: `{ lead: "Photos in chat.", text: "In a task chat, tap the photo button to
 Bad: `{ lead: "ImagePicker integration", text: "Added expo-image-manipulator pipeline" }`
 
 ## Page behaviour
-- Timeline grouped by `UPDATES_STOPS` (`"day"` | `"month"`, in `config.ts`); load about 8 on scroll with a "Show more".
-- A notice component compares the visitor's installed version (if known) with `version`/`needs`.
-- Home "What's new" strip reads `updates.slice(0, 3)`.
+See `references/updates-page/README.md` in site-builder (timeline, batches of 8, deep links). Home "What's new" strip reads `updates.slice(0, 3)`. Apps add a notice comparing the visitor's installed version with `version`/`needs`.
 
 ## Release batch (same commit set)
-1. Row in `docs/release/RELEASE_LOG.md` (technical). 2. Entry in `docs/release/WHATS_NEW.md` (plain). 3. Entry here. 4. Build passes (`npm run build`). 5. Site ships with the next approved push.
+1. Row in `docs/release/RELEASE_LOG.md` (technical). 2. Entry in `docs/release/WHATS_NEW.md` (plain). 3. Entry here. 4. Build passes (`npm run build`). 5. Site ships with the next approved push. 6. After deploy, verify by content (grep the final URL for the new title).

@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.2.20 · 2026-11-27
+- **studio-site 0.2.0 · site-builder, site-updates:** a ready-to-copy updates page reference (`references/updates-page/`: Next.js timeline with sticky rail and phone chips, intro glide, batching, deep links, tokens-only theming, tests) and the owner rule that every `/updates` page is a 1:1 port of it; a backfill method (dates from the production branch, prod flags, major milestones only); site-updates aligned (WHATS_NEW mirror, verify by content).
 
 ## 0.2.19 · 2026-11-27
 - **studio-core 0.1.30 · playbook, working-contract:** rules "Headless signed-in checks need a narrow allow rule" and "Screenshots stay out of git"; working-contract: stop finished helpers after merging their work.
