@@ -316,6 +316,16 @@
 **Why:** It acts in their signed-in browser; the owner rejected an unasked screenshot run.
 **How to apply:** Verify with headless screenshots (a helper with headless Chrome/Playwright or jsdom click-throughs), or hand the owner the local URL. Ask in one line if the real browser is truly needed.
 
+### Headless signed-in checks need a narrow allow rule
+**Rule:** When a headless check must sign in with a test account, the owner's approval passed on by the main session does not reach the permission check. Add one narrow allow rule for a single script path (`Bash(node <scratch>/shots.mjs*)` in the local settings file), run the script as a bare command (no `cd` prefix, no pipes), and let it read the test credentials from the env file without printing them.
+**Why:** Example (Kissago): a helper's headless sign-in was refused twice, even after the owner said yes in chat; a one-script rule unblocked every later visual check.
+**How to apply:** Ask the owner once, add the rule yourself after a yes, and name the exact path in each helper brief. Session scratch paths change, so the rule is re-added in a new session. If it is still refused, the helper stops and reports; never route around it.
+
+### Screenshots stay out of git
+**Rule:** Helper screenshots and test captures go in the session scratch folder, never in the repo, unless the owner asks for a specific image to be kept.
+**Why:** Example (Kissago): one visual pass committed 6.8 MB of PNGs, which had to be cut from the branch before merging so they would not sit in history forever.
+**How to apply:** Name the scratch folder in every brief that takes screenshots. At review, check the diff stat for binaries before merging.
+
 ### Clickable things look clickable; presets switch off
 **Rule:** Anything that opens a panel or page shows it without saying "click here": a slight lift, soft shadow and border tint on hover, a pointer cursor, and a quiet › after the name (the › carries it on touch screens). A button that applies a preset filter is a toggle: it shows a pressed state and a second tap clears exactly what it set.
 **Why:** Example (WowTodo admin): the owner couldn't tell tester cards opened the person panel, and "Show who I can pick" got stuck on with no way back except undoing five filters by hand.

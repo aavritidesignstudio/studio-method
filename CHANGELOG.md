@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.2.19 · 2026-11-27
+- **studio-core 0.1.30 · playbook, working-contract:** rules "Headless signed-in checks need a narrow allow rule" and "Screenshots stay out of git"; working-contract: stop finished helpers after merging their work.
+
 ## 0.2.18 · 2026-11-26
 - **studio-core 0.1.29 · playbook:** rules "Every 'use server' export is a public endpoint", "Browser tests the owner asked for: run them, cheaply" and "Stale dev cache after moving exports". Idea added: an `app-drive` skill.
 
